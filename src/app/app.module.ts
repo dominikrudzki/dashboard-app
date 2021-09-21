@@ -16,6 +16,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
+import { MatBadgeModule } from '@angular/material/badge';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/home/sidenav/sidenav.component';
@@ -36,6 +38,8 @@ const materialModules = [
 	MatSidenavModule,
 	MatGridListModule,
 	MatListModule,
+	MatBadgeModule,
+	DragDropModule,
 ];
 
 @NgModule({
@@ -47,9 +51,9 @@ const materialModules = [
 		SidenavComponent,
 		NavComponent,
 		OverviewComponent,
-  ProjectsComponent,
-  ChatComponent,
-  SettingsComponent,
+		ProjectsComponent,
+		ChatComponent,
+		SettingsComponent,
 	],
 	imports: [
 		BrowserModule,
