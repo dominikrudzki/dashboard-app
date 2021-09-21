@@ -1,0 +1,21 @@
+.home {
+	height: 100vh;
+	display: grid;
+	grid-template-areas:
+		"sidenav nav"
+		"sidenav content";
+	grid-template-rows: 64px 1fr;
+	grid-template-columns: 200px 1fr;
+
+	app-sidenav {
+		grid-area: sidenav;
+	}
+
+	app-nav {
+		grid-area: nav;
+	}
+
+	.content {
+		grid-area: content;
+	}
+}
