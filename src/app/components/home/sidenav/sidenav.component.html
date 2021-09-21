@@ -6,6 +6,7 @@
 		<mat-list-option
 			*ngFor="let item of navItems"
 			routerLink="{{ item.route }}"
+			[style.margin-top]="item.styles"
 			><mat-icon mat-list-icon>{{ item.icon }}</mat-icon
 			>{{ item.text }}</mat-list-option
 		>

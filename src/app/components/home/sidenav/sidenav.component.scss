@@ -3,7 +3,9 @@ mat-toolbar {
 }
 
 mat-selection-list {
+	padding: 0;
 	height: calc(100% - 64px);
+	background-color: #212121;
 }
 
 .menu {
