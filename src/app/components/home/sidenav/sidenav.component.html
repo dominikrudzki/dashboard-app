@@ -1,1 +1,13 @@
-<p>sidenav works!</p>
+<mat-toolbar>
+	<span>Dashboard</span>
+</mat-toolbar>
+<mat-selection-list [multiple]="false">
+	<div class="menu" style="display: flex; flex-direction: column">
+		<mat-list-option
+			*ngFor="let item of navItems"
+			routerLink="{{ item.route }}"
+			><mat-icon mat-list-icon>{{ item.icon }}</mat-icon
+			>{{ item.text }}</mat-list-option
+		>
+	</div>
+</mat-selection-list>

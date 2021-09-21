@@ -1,0 +1,14 @@
+mat-toolbar {
+	background-color: #161616;
+}
+
+mat-selection-list {
+	height: calc(100% - 64px);
+}
+
+.menu {
+	height: 100%;
+	.example-spacer {
+		flex-grow: 1;
+	}
+}
