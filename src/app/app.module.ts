@@ -15,11 +15,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/home/sidenav/sidenav.component';
 import { NavComponent } from './components/home/nav/nav.component';
 import { OverviewComponent } from './components/home/overview/overview.component';
+import { ProjectsComponent } from './components/home/projects/projects.component';
+import { ChatComponent } from './components/home/chat/chat.component';
+import { SettingsComponent } from './components/home/settings/settings.component';
 
 const materialModules = [
 	MatCardModule,
@@ -31,6 +35,7 @@ const materialModules = [
 	MatToolbarModule,
 	MatSidenavModule,
 	MatGridListModule,
+	MatListModule,
 ];
 
 @NgModule({
@@ -40,8 +45,11 @@ const materialModules = [
 		RegisterComponent,
 		HomeComponent,
 		SidenavComponent,
-  NavComponent,
-  OverviewComponent,
+		NavComponent,
+		OverviewComponent,
+  ProjectsComponent,
+  ChatComponent,
+  SettingsComponent,
 	],
 	imports: [
 		BrowserModule,
