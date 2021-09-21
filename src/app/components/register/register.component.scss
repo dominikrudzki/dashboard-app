@@ -1,0 +1,15 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+mat-card {
+	width: 90vw;
+	max-width: 450px;
+}
+
+mat-form-field {
+	display: block;
+}

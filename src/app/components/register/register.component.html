@@ -1,1 +1,28 @@
-<p>register works!</p>
+<div class="wrapper">
+	<mat-card>
+		<mat-card-content>
+			<form>
+				<h2>Register</h2>
+
+				<mat-form-field class="full-width-input">
+					<input
+						matInput
+						placeholder="Username"
+						formControlName="username"
+						required
+					/>
+				</mat-form-field>
+				<mat-form-field class="full-width-input">
+					<input
+						matInput
+						type="password"
+						placeholder="Password"
+						formControlName="password"
+						required
+					/>
+				</mat-form-field>
+				<button mat-raised-button color="primary">Register</button>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
