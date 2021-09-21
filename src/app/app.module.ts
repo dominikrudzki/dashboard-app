@@ -18,6 +18,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/home/sidenav/sidenav.component';
@@ -26,6 +27,7 @@ import { OverviewComponent } from './components/home/overview/overview.component
 import { ProjectsComponent } from './components/home/projects/projects.component';
 import { ChatComponent } from './components/home/chat/chat.component';
 import { SettingsComponent } from './components/home/settings/settings.component';
+import { AddTaskDialogComponent } from './components/home/dialogs/add-task-dialog/add-task-dialog.component';
 
 const materialModules = [
 	MatCardModule,
@@ -40,6 +42,7 @@ const materialModules = [
 	MatListModule,
 	MatBadgeModule,
 	DragDropModule,
+	MatDialogModule,
 ];
 
 @NgModule({
@@ -54,6 +57,7 @@ const materialModules = [
 		ProjectsComponent,
 		ChatComponent,
 		SettingsComponent,
+		AddTaskDialogComponent,
 	],
 	imports: [
 		BrowserModule,
