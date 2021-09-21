@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './components/home/home.component';
+import { SidenavComponent } from './components/home/sidenav/sidenav.component';
 
 const materialModules = [
 	MatCardModule,
@@ -26,7 +27,7 @@ const materialModules = [
 ];
 
 @NgModule({
-	declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent],
+	declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, SidenavComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
