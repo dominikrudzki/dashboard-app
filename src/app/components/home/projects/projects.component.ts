@@ -3,7 +3,9 @@ import {
 	moveItemInArray,
 	transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dialog.component';
 
 @Component({
 	selector: 'app-projects',
@@ -34,7 +36,7 @@ export class ProjectsComponent implements OnInit {
 		},
 	];
 
-	constructor() {}
+	constructor(public dialog: MatDialog) {}
 
 	ngOnInit(): void {}
 
@@ -53,5 +55,16 @@ export class ProjectsComponent implements OnInit {
 				event.currentIndex
 			);
 		}
+	}
+
+	openAddDialog() {
+		const dialogRef = this.dialog.open(AddTaskDialogComponent, {
+			width: '350px',
+			data: { listName: 'todoList' },
+		});
+
+		dialogRef.afterClosed().subscribe((result) => {
+			console.log('The dialog was closed');
+		});
 	}
 }
