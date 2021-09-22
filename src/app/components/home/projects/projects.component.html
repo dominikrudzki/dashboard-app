@@ -20,10 +20,7 @@
 				(cdkDropListDropped)="drop($event)"
 			>
 				<div class="box" *ngFor="let item of todo" cdkDrag>
-					<div
-						class="buttons"
-						style="position: absolute; top: 0; right: 0"
-					>
+					<div class="buttons">
 						<button mat-icon-button>
 							<mat-icon>edit</mat-icon>
 						</button>
