@@ -22,6 +22,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { environment } from 'src/environments/environment';
+import { initializeApp } from 'firebase/app';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+// import { AngularFireModule } from "@angular/fire/";
+// import { AngularFirestoreModule } from "@angular/fire/firestore";
+
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/home/sidenav/sidenav.component';
 import { NavComponent } from './components/home/nav/nav.component';
@@ -68,6 +75,8 @@ const materialModules = [
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		...materialModules,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
