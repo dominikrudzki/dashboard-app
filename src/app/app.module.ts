@@ -19,6 +19,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/home/sidenav/sidenav.component';
@@ -43,6 +45,8 @@ const materialModules = [
 	MatBadgeModule,
 	DragDropModule,
 	MatDialogModule,
+	MatTableModule,
+	ScrollingModule,
 ];
 
 @NgModule({

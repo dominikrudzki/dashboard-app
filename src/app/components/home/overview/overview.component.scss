@@ -1,0 +1,25 @@
+.overview {
+	height: 100%;
+}
+
+mat-card {
+	height: 100%;
+}
+
+mat-card-content > mat-card {
+	background-color: #383838;
+}
+
+.profile-image {
+	background-image: url("https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png");
+	background-size: cover;
+}
+
+table {
+	width: 100%;
+}
+
+.mat-form-field {
+	font-size: 14px;
+	width: 100%;
+}
