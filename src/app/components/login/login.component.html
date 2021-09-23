@@ -1,7 +1,7 @@
 <div class="wrapper">
 	<mat-card>
 		<mat-card-content>
-			<form>
+			<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 				<h2>Log In</h2>
 				<mat-form-field class="full-width-input">
 					<input
@@ -21,16 +21,14 @@
 					/>
 				</mat-form-field>
 				<div class="buttons">
-					<button routerLink="home" mat-raised-button color="accent">
-						Login
-					</button>
-					<button
+					<button mat-raised-button color="accent">Login</button>
+					<!-- <button
 						routerLink="register"
 						mat-raised-button
 						color="primary"
 					>
 						Register
-					</button>
+					</button> -->
 				</div>
 			</form>
 		</mat-card-content>
