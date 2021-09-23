@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class DataService {
-	users: Observable<any[]>;
+	userData: any;
 
-	constructor(private firestore: AngularFirestore) {
-		this.users = firestore.collection('users').valueChanges();
+	constructor(private firestore: AngularFirestore) {}
+
+	logIn(value: { username: string; password: string }) {
+		console.log('value', value);
+
+		this.firestore
+			.collection('users')
+			.doc(`${value.username}`)
+			.valueChanges()
+			.subscribe((data: { password: string } | any) => {
+				if ((data.password = value.password)) {
+					alert('you are logged in');
+				}
+			});
 	}
 }
