@@ -22,4 +22,6 @@ export class DataService {
 				}
 			});
 	}
+
+	register(value: { username: string; password: string }) {}
 }
