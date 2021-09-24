@@ -36,6 +36,7 @@ import { ChatComponent } from './components/home/chat/chat.component';
 import { SettingsComponent } from './components/home/settings/settings.component';
 import { AddTaskDialogComponent } from './components/home/dialogs/add-task-dialog/add-task-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LogoutComponent } from './components/home/logout/logout.component';
 
 const materialModules = [
 	MatCardModule,
@@ -69,6 +70,7 @@ const materialModules = [
 		ChatComponent,
 		SettingsComponent,
 		AddTaskDialogComponent,
+  LogoutComponent,
 	],
 	imports: [
 		BrowserModule,
