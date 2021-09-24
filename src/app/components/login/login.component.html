@@ -1,7 +1,10 @@
 <div class="wrapper">
 	<mat-card>
 		<mat-card-content>
-			<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+			<form
+				[formGroup]="loginForm"
+				(ngSubmit)="submitForm(loginForm.value)"
+			>
 				<h2>Log In</h2>
 				<mat-form-field class="full-width-input">
 					<input
@@ -10,6 +13,7 @@
 						formControlName="username"
 						required
 					/>
+					<mat-error>Fill in the field</mat-error>
 				</mat-form-field>
 				<mat-form-field class="full-width-input">
 					<input
@@ -19,7 +23,9 @@
 						formControlName="password"
 						required
 					/>
+					<mat-error>Fill in the field</mat-error>
 				</mat-form-field>
+
 				<div class="buttons">
 					<button type="submit" mat-raised-button color="accent">
 						Login
