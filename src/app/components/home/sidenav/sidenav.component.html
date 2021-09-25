@@ -3,8 +3,9 @@
 	<span>Dashboard</span>
 </mat-toolbar>
 <mat-selection-list [multiple]="false">
-	<div class="menu" style="display: flex; flex-direction: column">
+	<div class="menu">
 		<mat-list-option
+			value="ON"
 			*ngFor="let item of navItems"
 			routerLink="{{ item.route }}"
 			[style.margin-top]="item.styles"
