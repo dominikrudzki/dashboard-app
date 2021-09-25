@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CookieService } from 'src/app/services/cookie.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -18,11 +19,13 @@ export class LoginComponent implements OnInit {
 		private DataService: DataService,
 		private formBuilder: FormBuilder,
 		private route: Router,
-		private snackbar: MatSnackBar
+		private snackbar: MatSnackBar,
+		private cookieService: CookieService
 	) {}
 
 	ngOnInit(): void {
 		this.reactiveForm();
+		this.cookieService.checkCookie();
 	}
 
 	openSnackBar(message: string, action: string = ''): void {

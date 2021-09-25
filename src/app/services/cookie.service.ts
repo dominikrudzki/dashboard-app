@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 export class CookieService {
 	constructor(private route: Router) {}
 
-	navigateToLoginPage() {
-		this.route.navigate(['/']);
+	navigateToPath(path: string) {
+		this.route.navigate([path]);
 	}
 
 	checkCookie(name = 'user') {
@@ -18,12 +18,14 @@ export class CookieService {
 				?.pop() ||
 			''
 		) {
-			this.navigateToLoginPage();
+			this.navigateToPath('/');
+		} else {
+			this.navigateToPath('/home');
 		}
 	}
 
 	deleteCookie(cookieName: string) {
 		document.cookie = `${cookieName}=`;
-		this.navigateToLoginPage();
+		this.navigateToPath('/');
 	}
 }
