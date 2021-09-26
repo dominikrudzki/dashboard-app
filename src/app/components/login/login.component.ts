@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.reactiveForm();
-		this.cookieService.checkCookie() ? this.route.navigate(['home']) : '';
+		this.cookieService.checkCookie();
 	}
 
 	openSnackBar(message: string, action: string = ''): void {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 						console.log('You are logged in!');
 						this.DataService.setUserData({
 							username: value.username,
-							password: value.password,
+							// password: value.password,
 						});
 
 						this.route.navigate(['/home']);
