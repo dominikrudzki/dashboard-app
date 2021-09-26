@@ -7,9 +7,9 @@ import { CookieService } from 'src/app/services/cookie.service';
 	styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-	constructor(private CookieService: CookieService) {}
-
-	ngOnInit(): void {
+	constructor(private CookieService: CookieService) {
 		this.CookieService.checkCookie();
 	}
+
+	ngOnInit(): void {}
 }
