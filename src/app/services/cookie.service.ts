@@ -17,6 +17,10 @@ export class CookieService {
 		document.cookie = `${cookieName}=${value}; expires=${date.toUTCString()}`;
 	}
 
+	getCookieValue = (name: string) =>
+		document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() ||
+		'';
+
 	checkCookie(name = 'user') {
 		if (
 			!document.cookie
