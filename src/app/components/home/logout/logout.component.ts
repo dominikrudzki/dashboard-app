@@ -10,6 +10,6 @@ export class LogoutComponent implements OnInit {
 	constructor(private cookieService: CookieService) {}
 
 	ngOnInit(): void {
-		this.cookieService.deleteCookie('user');
+		this.cookieService.deleteAllCookies();
 	}
 }

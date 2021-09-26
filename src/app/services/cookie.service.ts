@@ -31,7 +31,7 @@ export class CookieService {
 		}
 	}
 
-	deleteCookie(cookieName: string = 'user') {
+	deleteAllCookies() {
 		document.cookie.split(';').forEach(function (c) {
 			document.cookie = c
 				.replace(/^ +/, '')
