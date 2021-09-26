@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from './cookie.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -6,17 +7,11 @@ import { Injectable } from '@angular/core';
 export class DataService {
 	private userData: any;
 
-	constructor() {}
-
-	setCookie(cookieName: string, value: any, expDays: any = 1) {
-		const date = new Date();
-		date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000);
-		document.cookie = `${cookieName}=${value}; expires=${date.toUTCString()}`;
-	}
+	constructor(private CookieService: CookieService) {}
 
 	setUserData(userData: any) {
 		this.userData = userData;
-		this.setCookie('user', this.userData.username);
+		this.CookieService.setCookie('user', this.userData.username);
 	}
 
 	logIn(value: { username: string; password: string }) {}
