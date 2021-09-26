@@ -1,6 +1,7 @@
 import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { CookieService } from 'src/app/services/cookie.service';
 
 export interface PeriodicElement {
 	date: Date;
@@ -34,8 +35,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class OverviewComponent {
 	displayedColumns: string[] = ['date', 'time', 'message'];
 	dataSource = new MatTableDataSource(ELEMENT_DATA);
+	username: string;
 
-	constructor() {}
+	constructor(private CookieService: CookieService) {
+		this.username = this.CookieService.cookieUserName;
+	}
 
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
