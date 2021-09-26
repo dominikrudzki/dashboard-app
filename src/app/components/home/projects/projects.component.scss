@@ -3,12 +3,6 @@
 	justify-content: center;
 	gap: 15px;
 
-	mat-card {
-		flex: 1;
-		max-width: 500px;
-		height: 100%;
-	}
-
 	mat-card-subtitle {
 		button {
 			margin-top: 15px;
@@ -20,6 +14,13 @@
 	.list {
 		min-height: 75px;
 	}
+}
+
+mat-card {
+	flex: 1;
+	min-width: 240px;
+	max-width: 500px;
+	height: 100%;
 }
 
 .box {
