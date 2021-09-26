@@ -5,16 +5,15 @@ import { Router } from '@angular/router';
 	providedIn: 'root',
 })
 export class CookieService {
-	constructor(private route: Router) {}
+	cookieUserName!: string;
 
-	navigateToPath(path: string) {
-		this.route.navigate([path]);
-	}
+	constructor(private route: Router) {}
 
 	setCookie(cookieName: string, value: any, expDays: number = 1) {
 		const date = new Date();
 		date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000);
 		document.cookie = `${cookieName}=${value}; expires=${date.toUTCString()}`;
+		this.cookieUserName = value;
 	}
 
 	getCookieValue = (name: string) =>
@@ -28,23 +27,28 @@ export class CookieService {
 				?.pop() ||
 			''
 		) {
-			this.navigateToPath('/');
-			return false;
+			this.route.navigate(['/']);
 		} else {
-			return true;
+			this.cookieUserName = this.getCookieValue('user');
+			this.route.navigate(['/home']);
 		}
 	}
 
 	deleteAllCookies() {
-		document.cookie.split(';').forEach(function (c) {
-			document.cookie = c
+		const deleteCookie = (cookie: string, path: string) => {
+			document.cookie = cookie
 				.replace(/^ +/, '')
 				.replace(
 					/=.*/,
-					'=;expires=' + new Date().toUTCString() + ';path=/'
+					'=;expires=' + new Date().toUTCString() + ';path=' + path
 				);
+		};
+
+		document.cookie.split(';').forEach((cookie) => {
+			deleteCookie(cookie, '/');
+			deleteCookie(cookie, '/home');
 		});
 
-		this.navigateToPath('/');
+		this.route.navigate(['/']);
 	}
 }
