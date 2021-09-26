@@ -7,9 +7,9 @@ import { CookieService } from 'src/app/services/cookie.service';
 	styleUrls: ['./logout.component.scss'],
 })
 export class LogoutComponent implements OnInit {
-	constructor(private cookieService: CookieService) {
+	constructor(private cookieService: CookieService) {}
+
+	ngOnInit(): void {
 		this.cookieService.deleteCookie('user');
 	}
-
-	ngOnInit(): void {}
 }
