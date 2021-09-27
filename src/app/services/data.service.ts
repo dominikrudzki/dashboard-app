@@ -28,35 +28,50 @@ export class DataService {
 
 	register(value: { username: string; password: string }) {}
 
-	clearTodos() {
-		for (let key in this.todos) {
-			this.todos[key] = [];
-		}
-	}
+	// clearTodos() {
+	// 	for (let key in this.todos) {
+	// 		this.todos[key] = [];
+	// 	}
+	// }
 
 	fetchTodos() {
-		console.log('fetchTodos!');
-		this.clearTodos();
-		// const user = this.cookieService.getCookieValue('user');
-		this.todos;
-
-		const user = 'admin';
+		// this.clearTodos();
+		const user = this.CookieService.getCookieValue('user');
+		// const user = 'admin';
 
 		try {
-			this.firestore
+			const sub = this.firestore
 				.collection(`users/${user}/todo`)
+				.doc('todos')
 				.valueChanges()
 				.subscribe((data: any) => {
-					data.forEach((item: any) => {
-						if (item.list === 'todo') this.todos.todo.push(item);
-						if (item.list === 'inProgress')
-							this.todos.inProgress.push(item);
-						if (item.list === 'done') this.todos.done.push(item);
-					});
+					console.log('fetchTodos!');
+					console.log(data);
+
+					this.todos = data;
+
+					sub.unsubscribe();
 				});
 		} catch {
 			// this.openSnackBar('Fill in the fields');
 		}
+	}
+
+	updateTodos(newTodos: Todos) {
+		console.log('todos updated!');
+		this.todos = newTodos;
+		const user = this.CookieService.getCookieValue('user');
+		console.log('new todos', newTodos);
+
+		setTimeout(() => {
+			this.firestore
+				.collection(`users/${'admin'}/todo`)
+				.doc('todos')
+				.update(this.todos)
+				.then(() => {
+					console.log('updated!', this.todos);
+				});
+		}, 1000);
 	}
 
 	getTodos() {
