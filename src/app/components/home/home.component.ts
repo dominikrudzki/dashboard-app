@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 		private DataService: DataService
 	) {
 		this.CookieService.checkCookie();
+		this.DataService.fetchTodos();
 	}
 
 	ngOnInit(): void {
