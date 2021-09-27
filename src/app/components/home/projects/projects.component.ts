@@ -15,23 +15,25 @@ import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dial
 	styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-	todos: Todos;
+	todos!: Todos;
 
 	display = false;
 
-	constructor(public dialog: MatDialog, private DataService: DataService) {
-		this.todos = this.DataService.getTodos();
-	}
+	constructor(public dialog: MatDialog, private DataService: DataService) {}
 
 	ngOnInit(): void {
+		console.log('getting todos');
+		this.todos = this.DataService.getTodos();
 		console.log('getting projects');
+		this.display = true;
 
 		console.log(this.todos);
-
-		this.display = true;
 	}
 
 	drop(event: CdkDragDrop<any[] | any>) {
+		this.DataService.updateTodos(this.todos);
+		// console.log(this.todos);
+
 		if (event.previousContainer === event.container) {
 			moveItemInArray(
 				event.container.data,
