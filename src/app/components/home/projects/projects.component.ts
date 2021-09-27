@@ -3,8 +3,10 @@ import {
 	moveItemInArray,
 	transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
+import { Todos } from 'src/app/shared/interfaces';
 import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dialog.component';
 
 @Component({
@@ -13,32 +15,21 @@ import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dial
 	styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-	todo = [
-		{
-			title: 'Create new angular project',
-			desc: 'Create another todo list.',
-		},
-		{
-			title: 'Add few components',
-			desc: 'Add and style components to make your animation looks better',
-		},
-	];
-	inProgress = [
-		{
-			title: 'Repair animation',
-			desc: 'Animation is little laggy when scrolling from bottom to top of the page.',
-		},
-	];
-	done = [
-		{
-			title: 'Change font family',
-			desc: 'Change font to Roboto, sans-serif.',
-		},
-	];
+	todos: Todos;
 
-	constructor(public dialog: MatDialog) {}
+	display = false;
 
-	ngOnInit(): void {}
+	constructor(public dialog: MatDialog, private DataService: DataService) {
+		this.todos = this.DataService.getTodos();
+	}
+
+	ngOnInit(): void {
+		console.log('getting projects');
+
+		console.log(this.todos);
+
+		this.display = true;
+	}
 
 	drop(event: CdkDragDrop<any[] | any>) {
 		if (event.previousContainer === event.container) {

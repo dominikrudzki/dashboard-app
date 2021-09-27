@@ -1,7 +1,7 @@
-<div class="projects">
+<div class="projects" *ngIf="display">
 	<mat-card>
 		<mat-card-title
-			><span matBadge="{{ todo.length }}" matBadgeOverlap="false"
+			><span matBadge="{{ todos.todo.length }}" matBadgeOverlap="false"
 				>To do</span
 			></mat-card-title
 		>
@@ -14,12 +14,12 @@
 			<div
 				cdkDropList
 				#todoList="cdkDropList"
-				[cdkDropListData]="todo"
+				[cdkDropListData]="todos.todo"
 				[cdkDropListConnectedTo]="[doneList, inProgressList]"
 				class="list"
 				(cdkDropListDropped)="drop($event)"
 			>
-				<div class="box" *ngFor="let item of todo" cdkDrag>
+				<div class="box" *ngFor="let item of todos.todo" cdkDrag>
 					<div class="buttons">
 						<button mat-icon-button>
 							<mat-icon>edit</mat-icon>
@@ -31,7 +31,7 @@
 					<h3>
 						<span>{{ item.title }}</span>
 					</h3>
-					<p>{{ item.desc }}</p>
+					<p>{{ item.description }}</p>
 				</div>
 			</div>
 		</mat-card-content>
@@ -39,7 +39,9 @@
 
 	<mat-card>
 		<mat-card-title
-			><span matBadge="{{ inProgress.length }}" matBadgeOverlap="false"
+			><span
+				matBadge="{{ todos.inProgress.length }}"
+				matBadgeOverlap="false"
 				>In progress</span
 			></mat-card-title
 		>
@@ -52,12 +54,12 @@
 			<div
 				cdkDropList
 				#inProgressList="cdkDropList"
-				[cdkDropListData]="inProgress"
+				[cdkDropListData]="todos.inProgress"
 				[cdkDropListConnectedTo]="[doneList, todoList]"
 				class="list"
 				(cdkDropListDropped)="drop($event)"
 			>
-				<div class="box" *ngFor="let item of inProgress" cdkDrag>
+				<div class="box" *ngFor="let item of todos.inProgress" cdkDrag>
 					<div
 						class="buttons"
 						style="position: absolute; top: 0; right: 0"
@@ -72,7 +74,7 @@
 					<h3>
 						<span>{{ item.title }}</span>
 					</h3>
-					<p>{{ item.desc }}</p>
+					<p>{{ item.description }}</p>
 				</div>
 			</div>
 		</mat-card-content>
@@ -80,7 +82,7 @@
 
 	<mat-card>
 		<mat-card-title
-			><span matBadge="{{ done.length }}" matBadgeOverlap="false"
+			><span matBadge="{{ todos.done.length }}" matBadgeOverlap="false"
 				>Completed</span
 			></mat-card-title
 		>
@@ -93,12 +95,12 @@
 			<div
 				cdkDropList
 				#doneList="cdkDropList"
-				[cdkDropListData]="done"
+				[cdkDropListData]="todos.done"
 				[cdkDropListConnectedTo]="[todoList, inProgressList]"
 				class="list"
 				(cdkDropListDropped)="drop($event)"
 			>
-				<div class="box" *ngFor="let item of done" cdkDrag>
+				<div class="box" *ngFor="let item of todos.done" cdkDrag>
 					<div
 						class="buttons"
 						style="position: absolute; top: 0; right: 0"
@@ -113,7 +115,7 @@
 					<h3>
 						<span>{{ item.title }}</span>
 					</h3>
-					<p>{{ item.desc }}</p>
+					<p>{{ item.description }}</p>
 				</div>
 			</div>
 		</mat-card-content>
