@@ -50,10 +50,10 @@ export class ProjectsComponent implements OnInit {
 		}
 	}
 
-	openAddDialog() {
+	openAddDialog(list: string) {
 		const dialogRef = this.dialog.open(AddTaskDialogComponent, {
 			width: '350px',
-			data: { listName: 'todoList' },
+			data: { listName: list },
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {

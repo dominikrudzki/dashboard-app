@@ -1,4 +1,4 @@
-<div class="projects" *ngIf="display">
+<div class="projects">
 	<mat-card>
 		<mat-card-title
 			><span matBadge="{{ todos.todo.length }}" matBadgeOverlap="false"
@@ -6,7 +6,7 @@
 			></mat-card-title
 		>
 		<mat-card-subtitle>
-			<button mat-button color="accent" (click)="openAddDialog()">
+			<button mat-button color="accent" (click)="openAddDialog('todo')">
 				<mat-icon>add</mat-icon>
 			</button>
 		</mat-card-subtitle>
@@ -46,7 +46,11 @@
 			></mat-card-title
 		>
 		<mat-card-subtitle>
-			<button mat-button color="accent" (click)="openAddDialog()">
+			<button
+				mat-button
+				color="accent"
+				(click)="openAddDialog('inProgress')"
+			>
 				<mat-icon>add</mat-icon>
 			</button>
 		</mat-card-subtitle>
@@ -87,7 +91,7 @@
 			></mat-card-title
 		>
 		<mat-card-subtitle>
-			<button mat-button color="accent" (click)="openAddDialog()">
+			<button mat-button color="accent" (click)="openAddDialog('done')">
 				<mat-icon>add</mat-icon>
 			</button>
 		</mat-card-subtitle>
