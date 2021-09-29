@@ -17,22 +17,17 @@ import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dial
 export class ProjectsComponent implements OnInit {
 	todos!: Todos;
 
-	display = false;
-
 	constructor(public dialog: MatDialog, private DataService: DataService) {}
 
 	ngOnInit(): void {
 		console.log('getting todos');
 		this.todos = this.DataService.getTodos();
 		console.log('getting projects');
-		this.display = true;
-
 		console.log(this.todos);
 	}
 
 	drop(event: CdkDragDrop<any[] | any>) {
-		this.DataService.updateTodos(this.todos);
-		// console.log(this.todos);
+		this.DataService.updateTodos();
 
 		if (event.previousContainer === event.container) {
 			moveItemInArray(
@@ -59,5 +54,9 @@ export class ProjectsComponent implements OnInit {
 		dialogRef.afterClosed().subscribe((result) => {
 			console.log('The dialog was closed');
 		});
+	}
+
+	deleteTodo(list: any, index: number) {
+		this.DataService.deleteTodos(list, index);
 	}
 }
