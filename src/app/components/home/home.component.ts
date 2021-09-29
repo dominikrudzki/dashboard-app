@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CookieService } from 'src/app/services/cookie.service';
 import { DataService } from 'src/app/services/data.service';
 
@@ -8,7 +7,7 @@ import { DataService } from 'src/app/services/data.service';
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 	constructor(
 		private CookieService: CookieService,
 		private DataService: DataService
@@ -21,5 +20,10 @@ export class HomeComponent implements OnInit {
 		if (!this.DataService.getUserData()) {
 			console.log('new connection');
 		}
+	}
+
+	ngOnDestroy(): void {
+		console.log('destroy');
+		this.DataService.resetTodos();
 	}
 }
