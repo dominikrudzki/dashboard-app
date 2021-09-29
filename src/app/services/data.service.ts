@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Todos } from '../shared/interfaces';
+import { TodoList, Todos } from '../shared/interfaces';
 import { CookieService } from './cookie.service';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { CookieService } from './cookie.service';
 })
 export class DataService {
 	private userData!: { username: string };
-	private todos: Todos | any = { todo: [], inProgress: [], done: [] };
+	private todos: Todos = { todo: [], inProgress: [], done: [] };
 
 	constructor(
 		private CookieService: CookieService,
@@ -28,11 +28,16 @@ export class DataService {
 
 	register(value: { username: string; password: string }) {}
 
-	// clearTodos() {
-	// 	for (let key in this.todos) {
-	// 		this.todos[key] = [];
-	// 	}
-	// }
+	addTodos(list: TodoList, item: any) {
+		this.todos[list].push(item);
+		console.log('addTodos', this.todos);
+
+		this.updateTodos();
+	}
+
+	resetTodos() {
+		this.todos = { todo: [], inProgress: [], done: [] };
+	}
 
 	fetchTodos() {
 		// this.clearTodos();
@@ -48,7 +53,18 @@ export class DataService {
 					console.log('fetchTodos!');
 					console.log(data);
 
-					this.todos = data;
+					if (!data) {
+						console.log('no path!');
+						this.firestore
+							.collection(`users/${user}/todo`)
+							.doc('todos')
+							.set(this.todos);
+					}
+
+					if (data) {
+						this.todos = data;
+					}
+					console.log('update todos');
 
 					sub.unsubscribe();
 				});
@@ -57,7 +73,7 @@ export class DataService {
 		}
 	}
 
-	updateTodos(newTodos: Todos) {
+	updateTodos(newTodos: Todos = this.todos) {
 		console.log('todos updated!');
 		this.todos = newTodos;
 		const user = this.CookieService.getCookieValue('user');
@@ -65,7 +81,7 @@ export class DataService {
 
 		setTimeout(() => {
 			this.firestore
-				.collection(`users/${'admin'}/todo`)
+				.collection(`users/${user}/todo`)
 				.doc('todos')
 				.update(this.todos)
 				.then(() => {
