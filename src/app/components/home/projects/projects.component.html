@@ -19,12 +19,16 @@
 				class="list"
 				(cdkDropListDropped)="drop($event)"
 			>
-				<div class="box" *ngFor="let item of todos.todo" cdkDrag>
+				<div
+					class="box"
+					*ngFor="let item of todos.todo; let i = index"
+					cdkDrag
+				>
 					<div class="buttons">
 						<button mat-icon-button>
 							<mat-icon>edit</mat-icon>
 						</button>
-						<button mat-icon-button>
+						<button mat-icon-button (click)="deleteTodo('todo', i)">
 							<mat-icon>close</mat-icon>
 						</button>
 					</div>
