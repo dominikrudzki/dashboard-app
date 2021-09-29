@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
-import { Todos, TodosItem } from 'src/app/shared/interfaces';
+import { Todos } from 'src/app/shared/interfaces';
 
 @Component({
 	selector: 'app-add-task-dialog',
