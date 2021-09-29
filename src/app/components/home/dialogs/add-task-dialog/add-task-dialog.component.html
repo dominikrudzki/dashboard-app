@@ -1,14 +1,14 @@
 <h1 mat-dialog-title>Add task</h1>
 <div mat-dialog-content>
-	<p>What's your favorite animal?</p>
 	<mat-form-field appearance="fill">
 		<mat-label>Title</mat-label>
-		<input matInput />
+		<input matInput [(ngModel)]="title" />
 	</mat-form-field>
 	<mat-form-field appearance="fill">
 		<mat-label>Description</mat-label>
 		<textarea
 			matInput
+			[(ngModel)]="description"
 			cdkTextareaAutosize
 			#autosize="cdkTextareaAutosize"
 			cdkAutosizeMinRows="1"
@@ -17,6 +17,10 @@
 	</mat-form-field>
 </div>
 <div mat-dialog-actions>
-	<button mat-button cdkFocusInitial>Add</button>
-	<button mat-button cdkFocusInitial (click)="onNoClick()">Close</button>
+	<button type="button" mat-button cdkFocusInitial (click)="addTodos()">
+		Add
+	</button>
+	<button type="button" mat-button cdkcdkFocusInitial (click)="onNoClick()">
+		Close
+	</button>
 </div>
