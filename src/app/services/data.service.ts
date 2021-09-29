@@ -24,14 +24,16 @@ export class DataService {
 		return this.userData;
 	}
 
-	logIn(value: { username: string; password: string }) {}
-
-	register(value: { username: string; password: string }) {}
-
 	addTodos(list: TodoList, item: any) {
 		this.todos[list].push(item);
 		console.log('addTodos', this.todos);
 
+		this.updateTodos();
+	}
+
+	deleteTodos(list: TodoList, item: any) {
+		console.log(this.todos[list][item]);
+		this.todos[list].splice(list.indexOf(item), 1);
 		this.updateTodos();
 	}
 
@@ -40,9 +42,7 @@ export class DataService {
 	}
 
 	fetchTodos() {
-		// this.clearTodos();
 		const user = this.CookieService.getCookieValue('user');
-		// const user = 'admin';
 
 		try {
 			const sub = this.firestore
@@ -73,11 +73,9 @@ export class DataService {
 		}
 	}
 
-	updateTodos(newTodos: Todos = this.todos) {
+	updateTodos() {
 		console.log('todos updated!');
-		this.todos = newTodos;
 		const user = this.CookieService.getCookieValue('user');
-		console.log('new todos', newTodos);
 
 		setTimeout(() => {
 			this.firestore
@@ -87,7 +85,7 @@ export class DataService {
 				.then(() => {
 					console.log('updated!', this.todos);
 				});
-		}, 1000);
+		}, 500);
 	}
 
 	getTodos() {
