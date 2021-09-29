@@ -31,6 +31,8 @@ export class DataService {
 		this.updateTodos();
 	}
 
+	editTodos(list: TodoList, item: any) {}
+
 	deleteTodos(list: TodoList, item: any) {
 		console.log(this.todos[list][item]);
 		this.todos[list].splice(list.indexOf(item), 1);
