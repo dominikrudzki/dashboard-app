@@ -5,8 +5,8 @@ export interface TodosItem {
 	list: string;
 }
 
-export interface Todos {
-	todo: TodosItem[];
-	inProgress: TodosItem[];
-	done: TodosItem[];
-}
+export type Todos = {
+	[key in TodoList]: TodosItem[];
+};
+
+export type TodoList = 'todo' | 'inProgress' | 'done';
