@@ -25,7 +25,10 @@
 					cdkDrag
 				>
 					<div class="buttons">
-						<button mat-icon-button>
+						<button
+							mat-icon-button
+							(click)="openEditDialog('todo', i)"
+						>
 							<mat-icon>edit</mat-icon>
 						</button>
 						<button mat-icon-button (click)="deleteTodo('todo', i)">
