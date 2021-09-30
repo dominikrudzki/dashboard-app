@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { Todos } from 'src/app/shared/interfaces';
 import { AddTaskDialogComponent } from '../dialogs/add-task-dialog/add-task-dialog.component';
+import { EditTaskDialogComponent } from '../dialogs/edit-task-dialog/edit-task-dialog.component';
 
 @Component({
 	selector: 'app-projects',
@@ -49,6 +50,17 @@ export class ProjectsComponent implements OnInit {
 		const dialogRef = this.dialog.open(AddTaskDialogComponent, {
 			width: '350px',
 			data: { listName: list },
+		});
+
+		dialogRef.afterClosed().subscribe((result) => {
+			console.log('The dialog was closed');
+		});
+	}
+
+	openEditDialog(list: string, index: number) {
+		const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+			width: '350px',
+			data: { listName: list, index: index },
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {

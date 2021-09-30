@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { TodoList, Todos } from '../shared/interfaces';
 import { CookieService } from './cookie.service';
 
@@ -31,7 +32,17 @@ export class DataService {
 		this.updateTodos();
 	}
 
-	editTodos(list: TodoList, item: any) {}
+	editTodos(list: TodoList, item: any, index: number) {
+		console.log(list, item);
+
+		// this.todos[list].
+		console.log(this.todos[list][index]);
+
+		this.todos[list][index].title = item.title;
+		this.todos[list][index].description = item.description;
+
+		this.updateTodos();
+	}
 
 	deleteTodos(list: TodoList, item: any) {
 		console.log(this.todos[list][item]);
@@ -83,7 +94,7 @@ export class DataService {
 			this.firestore
 				.collection(`users/${user}/todo`)
 				.doc('todos')
-				.update(this.todos)
+				.ref.update(this.todos)
 				.then(() => {
 					console.log('updated!', this.todos);
 				});
