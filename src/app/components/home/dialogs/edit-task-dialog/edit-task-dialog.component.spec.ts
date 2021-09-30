@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteTaksDialogComponent } from './delete-taks-dialog.component';
+import { EditTaskDialogComponent } from './edit-task-dialog.component';
 
-describe('DeleteTaksDialogComponent', () => {
-  let component: DeleteTaksDialogComponent;
-  let fixture: ComponentFixture<DeleteTaksDialogComponent>;
+describe('EditTaskDialogComponent', () => {
+  let component: EditTaskDialogComponent;
+  let fixture: ComponentFixture<EditTaskDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteTaksDialogComponent ]
+      declarations: [ EditTaskDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteTaksDialogComponent);
+    fixture = TestBed.createComponent(EditTaskDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

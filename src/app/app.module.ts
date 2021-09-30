@@ -37,7 +37,7 @@ import { SettingsComponent } from './components/home/settings/settings.component
 import { AddTaskDialogComponent } from './components/home/dialogs/add-task-dialog/add-task-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './components/home/logout/logout.component';
-import { DeleteTaksDialogComponent } from './components/home/dialogs/delete-taks-dialog/delete-taks-dialog.component';
+import { EditTaskDialogComponent } from './components/home/dialogs/edit-task-dialog/edit-task-dialog.component';
 
 const materialModules = [
 	MatCardModule,
@@ -72,7 +72,7 @@ const materialModules = [
 		SettingsComponent,
 		AddTaskDialogComponent,
 		LogoutComponent,
-  DeleteTaksDialogComponent,
+  EditTaskDialogComponent,
 	],
 	imports: [
 		BrowserModule,
