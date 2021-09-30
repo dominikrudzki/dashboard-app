@@ -13,5 +13,14 @@ export class ChatComponent implements OnInit {
 		this.username = this.CookieService.cookieUserName;
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		// prepare for live updates
+		// this.firestore
+		// 	.collection('chat')
+		// 	.doc('messages')
+		// 	.snapshotChanges()
+		// 	.subscribe((doc) => {
+		// 		console.log('change', doc);
+		// 	});
+	}
 }
