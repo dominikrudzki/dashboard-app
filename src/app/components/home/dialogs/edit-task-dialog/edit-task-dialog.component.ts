@@ -18,6 +18,15 @@ export class EditTaskDialogComponent {
 		private DataService: DataService
 	) {
 		console.log(list.listName, list.index);
+		this.title = this.DataService.getSpecificTodo(
+			list.listName,
+			list.index
+		).title;
+
+		this.description = this.DataService.getSpecificTodo(
+			list.listName,
+			list.index
+		).description;
 	}
 
 	editTodos() {

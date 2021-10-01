@@ -101,6 +101,10 @@ export class DataService {
 		}, 500);
 	}
 
+	getSpecificTodo(listName: TodoList, index: number) {
+		return this.todos[listName][index];
+	}
+
 	getTodos() {
 		return this.todos;
 	}
