@@ -1,5 +1,6 @@
 import {
 	CdkDragDrop,
+	CdkDropList,
 	moveItemInArray,
 	transferArrayItem,
 } from '@angular/cdk/drag-drop';
@@ -18,14 +19,40 @@ import { EditTaskDialogComponent } from '../dialogs/edit-task-dialog/edit-task-d
 export class ProjectsComponent implements OnInit {
 	todos!: Todos;
 
-	constructor(public dialog: MatDialog, private DataService: DataService) {}
+	connectedTo = ['todoList', 'inProgressList', 'doneList'];
 
-	ngOnInit(): void {
-		console.log('getting todos');
+	lists: {
+		listTitle: string;
+		listDialogName: string;
+		listType: any[];
+		connectedTo: string[];
+	}[];
+
+	constructor(public dialog: MatDialog, private DataService: DataService) {
 		this.todos = this.DataService.getTodos();
-		console.log('getting projects');
-		console.log(this.todos);
+		this.lists = [
+			{
+				listTitle: 'To do',
+				listDialogName: 'todo',
+				listType: this.todos.todo,
+				connectedTo: ['cdk-drop-list-2', 'cdk-drop-list-1'],
+			},
+			{
+				listTitle: 'In progress',
+				listDialogName: 'inProgress',
+				listType: this.todos.inProgress,
+				connectedTo: ['cdk-drop-list-2', 'cdk-drop-list-0'],
+			},
+			{
+				listTitle: 'Done',
+				listDialogName: 'done',
+				listType: this.todos.done,
+				connectedTo: ['cdk-drop-list-0', 'cdk-drop-list-1'],
+			},
+		];
 	}
+
+	ngOnInit(): void {}
 
 	drop(event: CdkDragDrop<any[] | any>) {
 		this.DataService.updateTodos();
@@ -57,7 +84,9 @@ export class ProjectsComponent implements OnInit {
 		});
 	}
 
-	openEditDialog(list: string, index: number) {
+	openEditDialog(list: any, index: number) {
+		console.log(list);
+
 		const dialogRef = this.dialog.open(EditTaskDialogComponent, {
 			width: '350px',
 			data: { listName: list, index: index },
