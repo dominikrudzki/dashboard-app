@@ -24,18 +24,41 @@ mat-label {
 	font-size: 20px;
 }
 
-mat-card-content {
-	& > mat-card {
-		display: flex;
-		background-color: #7b1fa24d;
+.example-viewport {
+	height: 200px;
+	width: 100%;
+	// border: 1px solid black;
+}
 
-		.profile-image {
-			background-image: url("https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png");
-			background-size: cover;
-		}
+.example-dt {
+	height: 30px;
+	font-weight: bold;
+}
 
-		mat-card-subtitle {
-			margin: 0;
-		}
+.example-dd {
+	border-bottom: 2px solid #333333;
+	padding: 0.2em 0;
+	margin-bottom: 1em;
+}
+
+.mat-card-content,
+.cdk-virtual-scroll-viewport {
+	height: 100%;
+}
+
+.example-dt {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 18px;
+
+	span {
+		font-size: 14px;
+		color: rgb(112, 112, 112);
 	}
+}
+
+img {
+	border-radius: 50%;
+	height: 100%;
 }
