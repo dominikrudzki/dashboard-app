@@ -1,8 +1,10 @@
 <div class="projects">
-	<mat-card>
+	<mat-card *ngFor="let list of lists">
 		<mat-card-title
-			><span matBadge="{{ todos.todo.length }}" matBadgeOverlap="false"
-				>To do</span
+			><span
+				matBadge="{{ list.listType.length }}"
+				matBadgeOverlap="false"
+				>{{ list.listTitle }}</span
 			></mat-card-title
 		>
 		<mat-card-subtitle>
@@ -13,113 +15,27 @@
 		<mat-card-content>
 			<div
 				cdkDropList
-				#todoList="cdkDropList"
-				[cdkDropListData]="todos.todo"
-				[cdkDropListConnectedTo]="[doneList, inProgressList]"
+				[cdkDropListData]="list.listType"
+				[cdkDropListConnectedTo]="list.connectedTo"
 				class="list"
 				(cdkDropListDropped)="drop($event)"
 			>
 				<div
 					class="box"
-					*ngFor="let item of todos.todo; let i = index"
+					*ngFor="let item of list.listType; let i = index"
 					cdkDrag
 				>
 					<div class="buttons">
 						<button
 							mat-icon-button
-							(click)="openEditDialog('todo', i)"
+							(click)="openEditDialog(list.listDialogName, i)"
 						>
 							<mat-icon>edit</mat-icon>
 						</button>
-						<button mat-icon-button (click)="deleteTodo('todo', i)">
-							<mat-icon>close</mat-icon>
-						</button>
-					</div>
-					<h3>
-						<span>{{ item.title }}</span>
-					</h3>
-					<p>{{ item.description }}</p>
-				</div>
-			</div>
-		</mat-card-content>
-	</mat-card>
-
-	<mat-card>
-		<mat-card-title
-			><span
-				matBadge="{{ todos.inProgress.length }}"
-				matBadgeOverlap="false"
-				>In progress</span
-			></mat-card-title
-		>
-		<mat-card-subtitle>
-			<button
-				mat-button
-				color="accent"
-				(click)="openAddDialog('inProgress')"
-			>
-				<mat-icon>add</mat-icon>
-			</button>
-		</mat-card-subtitle>
-		<mat-card-content>
-			<div
-				cdkDropList
-				#inProgressList="cdkDropList"
-				[cdkDropListData]="todos.inProgress"
-				[cdkDropListConnectedTo]="[doneList, todoList]"
-				class="list"
-				(cdkDropListDropped)="drop($event)"
-			>
-				<div class="box" *ngFor="let item of todos.inProgress" cdkDrag>
-					<div
-						class="buttons"
-						style="position: absolute; top: 0; right: 0"
-					>
-						<button mat-icon-button>
-							<mat-icon>edit</mat-icon>
-						</button>
-						<button mat-icon-button>
-							<mat-icon>close</mat-icon>
-						</button>
-					</div>
-					<h3>
-						<span>{{ item.title }}</span>
-					</h3>
-					<p>{{ item.description }}</p>
-				</div>
-			</div>
-		</mat-card-content>
-	</mat-card>
-
-	<mat-card>
-		<mat-card-title
-			><span matBadge="{{ todos.done.length }}" matBadgeOverlap="false"
-				>Completed</span
-			></mat-card-title
-		>
-		<mat-card-subtitle>
-			<button mat-button color="accent" (click)="openAddDialog('done')">
-				<mat-icon>add</mat-icon>
-			</button>
-		</mat-card-subtitle>
-		<mat-card-content>
-			<div
-				cdkDropList
-				#doneList="cdkDropList"
-				[cdkDropListData]="todos.done"
-				[cdkDropListConnectedTo]="[todoList, inProgressList]"
-				class="list"
-				(cdkDropListDropped)="drop($event)"
-			>
-				<div class="box" *ngFor="let item of todos.done" cdkDrag>
-					<div
-						class="buttons"
-						style="position: absolute; top: 0; right: 0"
-					>
-						<button mat-icon-button>
-							<mat-icon>edit</mat-icon>
-						</button>
-						<button mat-icon-button>
+						<button
+							mat-icon-button
+							(click)="deleteTodo(list.listDialogName, i)"
+						>
 							<mat-icon>close</mat-icon>
 						</button>
 					</div>
