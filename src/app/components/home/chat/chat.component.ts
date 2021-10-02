@@ -7,10 +7,26 @@ import { CookieService } from 'src/app/services/cookie.service';
 	styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-	username: string;
+	messages: any;
 
-	constructor(private CookieService: CookieService) {
-		this.username = this.CookieService.cookieUserName;
+	constructor() {
+		this.messages = [
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+		];
 	}
 
 	ngOnInit(): void {
