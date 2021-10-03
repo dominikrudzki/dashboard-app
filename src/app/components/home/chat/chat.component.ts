@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'src/app/services/cookie.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
 	selector: 'app-chat',
@@ -9,34 +9,25 @@ import { CookieService } from 'src/app/services/cookie.service';
 export class ChatComponent implements OnInit {
 	messages: any;
 
-	constructor() {
+	constructor(private firestore: AngularFirestore) {
 		this.messages = [
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
-			{ username: 'admin', date: new Date(), message: 'Hello world!' },
+			{ author: 'teste', date: new Date(), message: 'test!' },
 		];
 	}
 
-	ngOnInit(): void {
+	ngOnInit() {
 		// prepare for live updates
-		// this.firestore
-		// 	.collection('chat')
-		// 	.doc('messages')
-		// 	.snapshotChanges()
-		// 	.subscribe((doc) => {
-		// 		console.log('change', doc);
-		// 	});
+
+		const chatDB = this.firestore.collection('chat').doc('messages');
+
+		const sub = chatDB.valueChanges().subscribe((messages: any) => {
+			console.log(messages.all[0]);
+
+			this.messages = messages.all;
+		});
+		// .snapshotChanges()
+		// .subscribe((doc) => {
+		// 	console.log('change', doc);
+		// });
 	}
 }
