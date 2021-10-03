@@ -4,7 +4,12 @@
 	flex-direction: column;
 
 	& > mat-card {
-		flex-grow: 1;
+		&:nth-of-type(1) {
+			flex-grow: 1;
+		}
+		&:nth-of-type(2) {
+			background-color: rgb(54, 54, 54);
+		}
 	}
 }
 
