@@ -38,6 +38,7 @@ import { AddTaskDialogComponent } from './components/home/dialogs/add-task-dialo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './components/home/logout/logout.component';
 import { EditTaskDialogComponent } from './components/home/dialogs/edit-task-dialog/edit-task-dialog.component';
+import { ChangeSettingsDialogComponent } from './components/home/dialogs/change-settings-dialog/change-settings-dialog.component';
 
 const materialModules = [
 	MatCardModule,
@@ -72,7 +73,8 @@ const materialModules = [
 		SettingsComponent,
 		AddTaskDialogComponent,
 		LogoutComponent,
-  EditTaskDialogComponent,
+		EditTaskDialogComponent,
+		ChangeSettingsDialogComponent,
 	],
 	imports: [
 		BrowserModule,
