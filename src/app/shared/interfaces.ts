@@ -10,3 +10,10 @@ export type Todos = {
 };
 
 export type TodoList = 'todo' | 'inProgress' | 'done';
+
+export interface Message {
+	id: number;
+	author: string;
+	message: string;
+	date: number;
+}
