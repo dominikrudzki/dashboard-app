@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CookieService } from 'src/app/services/cookie.service';
+import { Message } from 'src/app/shared/interfaces';
 
 @Component({
 	selector: 'app-chat',
@@ -15,9 +16,7 @@ export class ChatComponent implements OnInit {
 		private firestore: AngularFirestore,
 		private CookieService: CookieService
 	) {
-		this.messages = [
-			{ author: 'teste', date: new Date(), message: 'test!' },
-		];
+		this.messages = [{ author: '', date: new Date(), message: '' }];
 	}
 
 	ngOnInit() {
@@ -33,7 +32,9 @@ export class ChatComponent implements OnInit {
 			.subscribe((messages: any) => {
 				console.log(messages);
 
-				this.messages = messages;
+				this.messages = messages.sort((a: Message, b: Message) => {
+					return a.id - b.id;
+				});
 			});
 	}
 
@@ -44,7 +45,7 @@ export class ChatComponent implements OnInit {
 			id: new Date().valueOf(),
 			author: this.CookieService.getCookieValue('user'),
 			message: this.message,
-			date: new Date(),
+			date: new Date().valueOf(),
 		});
 
 		this.message = '';
