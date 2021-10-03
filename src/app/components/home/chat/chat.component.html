@@ -11,7 +11,7 @@
 							/>
 							{{ message.author }}
 							<span>
-								{{ message.date | date: "medium" }}
+								<!-- {{ message.date | date: "medium" }} -->
 							</span>
 						</dt>
 						<dd class="example-dd">
@@ -22,17 +22,18 @@
 			</cdk-virtual-scroll-viewport>
 		</mat-card-content>
 	</mat-card>
-	<form class="example-form">
-		<mat-card>
-			<mat-form-field appearance="outline" class="full-width">
-				<mat-label>Message</mat-label>
-				<input
-					matInput
-					class="msg"
-					autocomplete="off"
-					placeholder="Your message.."
-				/>
-			</mat-form-field>
-		</mat-card>
-	</form>
+
+	<mat-card>
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Message</mat-label>
+			<input
+				matInput
+				class="msg"
+				[(ngModel)]="message"
+				(keydown.enter)="sendMessage()"
+				autocomplete="off"
+				placeholder="Your message.."
+			/>
+		</mat-form-field>
+	</mat-card>
 </div>
