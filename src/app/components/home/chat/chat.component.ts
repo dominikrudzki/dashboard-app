@@ -20,12 +20,6 @@ export class ChatComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// prepare for live updates
-		// .snapshotChanges()
-		// .subscribe((doc) => {
-		// 	console.log('change', doc);
-		// });
-
 		const sub = this.firestore
 			.collection('chat')
 			.valueChanges()
@@ -35,7 +29,21 @@ export class ChatComponent implements OnInit {
 				this.messages = messages.sort((a: Message, b: Message) => {
 					return a.id - b.id;
 				});
+
+				setTimeout(() => {
+					this.scrollToBottom();
+				}, 100);
 			});
+	}
+
+	scrollToBottom(): void {
+		console.log('scroll');
+
+		try {
+			document
+				.querySelector('.example-dt:last-of-type')
+				?.scrollIntoView({ behavior: 'smooth' });
+		} catch (err) {}
 	}
 
 	async sendMessage() {
@@ -49,11 +57,6 @@ export class ChatComponent implements OnInit {
 		});
 
 		this.message = '';
-
-		// this.firestore
-		// 	.collection('chat')
-		// 	.doc('messages/all')
-		// 	.set({ name: 'bbbb' }, { merge: true });
 		console.log('submit');
 	}
 }

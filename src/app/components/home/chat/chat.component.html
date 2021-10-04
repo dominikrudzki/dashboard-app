@@ -1,7 +1,11 @@
 <div class="chat">
 	<mat-card>
 		<mat-card-content>
-			<cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
+			<cdk-virtual-scroll-viewport
+				id="scrollList"
+				class="example-viewport"
+				itemSize="60"
+			>
 				<dl class="example-dl">
 					<ng-container *cdkVirtualFor="let message of messages">
 						<dt class="example-dt">
