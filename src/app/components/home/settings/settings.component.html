@@ -3,19 +3,37 @@
 		<mat-card-title>Avatar</mat-card-title>
 		<mat-card-content>
 			<div>
-				<div mat-card-avatar class="profile-image"></div>
+				<div
+					mat-card-avatar
+					class="profile-image"
+					[style.background-image]="user.avatar"
+				></div>
 			</div>
-			<button mat-raised-button color="basic">Change</button>
+			<button
+				mat-raised-button
+				color="basic"
+				(click)="openSettingsDialog(user.avatar, 'avatar', 'url')"
+			>
+				Change
+			</button>
 		</mat-card-content>
 		<mat-card-title>Password</mat-card-title>
 		<mat-card-content>
 			<div>
 				<p>*******</p>
 			</div>
-			<button mat-raised-button color="basic">Change</button>
+			<button
+				mat-raised-button
+				color="basic"
+				(click)="openSettingsDialog('ps', 'password', 'ps')"
+			>
+				Change
+			</button>
 		</mat-card-content>
 	</mat-card>
 	<mat-card>
-		<button mat-raised-button color="warn">Delete this account</button>
+		<button mat-raised-button disabled color="warn">
+			Delete this account
+		</button>
 	</mat-card>
 </div>
