@@ -1,1 +1,13 @@
-<p>change-settings-dialog works!</p>
+<h1 mat-dialog-title>Change {{ data.title }}</h1>
+<div mat-dialog-content>
+	<mat-form-field appearance="fill">
+		<mat-label>{{ data.placeholder }}</mat-label>
+		<input matInput />
+	</mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button type="button" mat-button cdkFocusInitial>Change</button>
+	<button type="button" mat-button mat-dialog-close cdkcdkFocusInitial>
+		Close
+	</button>
+</div>
