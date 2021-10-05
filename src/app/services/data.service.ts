@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { doc, onSnapshot } from 'firebase/firestore';
 import { TodoList, Todos } from '../shared/interfaces';
 import { CookieService } from './cookie.service';
 
@@ -8,7 +7,7 @@ import { CookieService } from './cookie.service';
 	providedIn: 'root',
 })
 export class DataService {
-	private userData!: { username: string };
+	private userData!: { avatar: string; username: string };
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
 
 	constructor(
@@ -19,6 +18,13 @@ export class DataService {
 	setUserData(userData: any) {
 		this.userData = userData;
 		this.CookieService.setCookie('user', this.userData.username);
+	}
+
+	setUserAvatar(userAvatar: string) {
+		// console.log(userAvatar);
+
+		this.userData.avatar = `url('${userAvatar}')`;
+		// console.log(this.userData.avatar);
 	}
 
 	getUserData() {
