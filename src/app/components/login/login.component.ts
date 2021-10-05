@@ -54,8 +54,8 @@ export class LoginComponent implements OnInit {
 					if (data.password === value.password) {
 						console.log('You are logged in!');
 						this.DataService.setUserData({
+							avatar: '',
 							username: value.username,
-							// password: value.password,
 						});
 
 						this.route.navigate(['/home']);
