@@ -14,6 +14,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 	) {
 		this.CookieService.checkCookie();
 		this.DataService.fetchTodos();
+		this.DataService.setUserData({
+			avatar: 'url(https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png)', // fetch from database
+			username: this.CookieService.cookieUserName,
+		});
 	}
 
 	ngOnInit(): void {
