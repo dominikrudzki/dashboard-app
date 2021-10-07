@@ -19,6 +19,7 @@
 		<mat-card-content>
 			<div
 				cdkDropList
+				[id]="list.listDialogName"
 				[cdkDropListData]="list.listType"
 				[cdkDropListConnectedTo]="list.connectedTo"
 				class="list"

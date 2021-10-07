@@ -19,8 +19,6 @@ import { EditTaskDialogComponent } from '../dialogs/edit-task-dialog/edit-task-d
 export class ProjectsComponent implements OnInit {
 	todos!: Todos;
 
-	connectedTo = ['todoList', 'inProgressList', 'doneList'];
-
 	lists: {
 		listTitle: string;
 		listDialogName: string;
@@ -35,26 +33,26 @@ export class ProjectsComponent implements OnInit {
 				listTitle: 'To do',
 				listDialogName: 'todo',
 				listType: this.todos.todo,
-				connectedTo: ['cdk-drop-list-2', 'cdk-drop-list-1'],
+				connectedTo: ['done', 'inProgress'],
 			},
 			{
 				listTitle: 'In progress',
 				listDialogName: 'inProgress',
 				listType: this.todos.inProgress,
-				connectedTo: ['cdk-drop-list-2', 'cdk-drop-list-0'],
+				connectedTo: ['done', 'todo'],
 			},
 			{
 				listTitle: 'Done',
 				listDialogName: 'done',
 				listType: this.todos.done,
-				connectedTo: ['cdk-drop-list-0', 'cdk-drop-list-1'],
+				connectedTo: ['todo', 'inProgress'],
 			},
 		];
 	}
 
 	ngOnInit(): void {}
 
-	drop(event: CdkDragDrop<any[] | any>) {
+	drop(event: CdkDragDrop<any>) {
 		this.DataService.updateTodos();
 
 		if (event.previousContainer === event.container) {
