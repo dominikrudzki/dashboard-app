@@ -1,3 +1,7 @@
+export interface UserData {
+	avatar_url: string;
+	password: string;
+}
 export interface TodosItem {
 	id: number;
 	title: string;
