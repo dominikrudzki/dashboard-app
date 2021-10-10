@@ -1,14 +1,9 @@
 <mat-toolbar>
-	<button mat-icon-button aria-label="Example icon-button with menu icon">
-		<mat-icon>menu</mat-icon>
-	</button>
 	<span class="example-spacer"></span>
-	<button mat-icon-button>
-		<mat-icon matBadge="0" matBadgeOverlap="true" matBadgeColor="warn"
-			>notifications</mat-icon
-		>
-	</button>
-	<span class="name">{{ username }}</span>
-	<!-- <img src="" alt="avatar" /> -->
-	<div mat-card-avatar class="profile-image"></div>
+	<span class="name">{{ userData.username }}</span>
+	<div
+		mat-card-avatar
+		class="profile-image"
+		[style.background-image]="userData.avatar"
+	></div>
 </mat-toolbar>

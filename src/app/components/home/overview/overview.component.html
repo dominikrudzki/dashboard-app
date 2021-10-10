@@ -1,8 +1,12 @@
 <div class="overview">
 	<mat-card>
 		<mat-card-header>
-			<div mat-card-avatar class="profile-image"></div>
-			<mat-card-title>Hi {{ username }}</mat-card-title>
+			<div
+				mat-card-avatar
+				class="profile-image"
+				[style.background-image]="userData.avatar"
+			></div>
+			<mat-card-title>Hi {{ userData.username }}</mat-card-title>
 			<mat-card-subtitle
 				>Account date created: 22 Sep 2021</mat-card-subtitle
 			>

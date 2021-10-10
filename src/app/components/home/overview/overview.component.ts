@@ -2,6 +2,8 @@ import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CookieService } from 'src/app/services/cookie.service';
+import { DataService } from 'src/app/services/data.service';
+import { UserData } from 'src/app/shared/interfaces';
 
 export interface PeriodicElement {
 	date: Date;
@@ -35,10 +37,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class OverviewComponent {
 	displayedColumns: string[] = ['date', 'time', 'message'];
 	dataSource = new MatTableDataSource(ELEMENT_DATA);
-	username: string;
+	userData: any;
 
-	constructor(private CookieService: CookieService) {
-		this.username = this.CookieService.cookieUserName;
+	constructor(
+		private CookieService: CookieService,
+		private DataService: DataService
+	) {
+		// this.username = this.CookieService.cookieUserName;
+		this.userData = this.DataService.getUserData();
+		console.log(this.userData.avatar);
 	}
 
 	applyFilter(event: Event) {

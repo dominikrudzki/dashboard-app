@@ -21,15 +21,14 @@ export class ChangeSettingsDialogComponent implements OnInit {
 	changeValue() {
 		switch (this.data.title) {
 			case 'avatar':
-				console.log('avatar change');
 				this.DataService.setUserAvatar(this.input);
-				console.log(this.DataService.getUserData());
 
 				break;
 			case 'password':
 				console.log('password change');
-
+				this.DataService.setUserPassword(this.input);
 				break;
 		}
+		this.dialogRef.close();
 	}
 }

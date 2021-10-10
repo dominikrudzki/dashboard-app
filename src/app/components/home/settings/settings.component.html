@@ -12,7 +12,13 @@
 			<button
 				mat-raised-button
 				color="basic"
-				(click)="openSettingsDialog(user.avatar, 'avatar', 'url')"
+				(click)="
+					openSettingsDialog(
+						user.avatar,
+						'avatar',
+						'url [ jpg, png ]'
+					)
+				"
 			>
 				Change
 			</button>

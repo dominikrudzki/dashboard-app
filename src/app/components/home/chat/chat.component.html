@@ -9,10 +9,6 @@
 				<dl class="example-dl">
 					<ng-container *cdkVirtualFor="let message of messages">
 						<dt class="example-dt">
-							<img
-								src="https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png"
-								alt="logo"
-							/>
 							{{ message.author }}
 							<span>
 								{{ message.date | date: "medium" }}

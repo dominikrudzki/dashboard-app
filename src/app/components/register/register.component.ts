@@ -48,6 +48,8 @@ export class RegisterComponent implements OnInit {
 
 		await this.firestore.collection(`users`).doc(value.username).set({
 			password: value.password,
+			avatar_url:
+				"url('https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png')",
 		});
 
 		this.route.navigate(['/']);
