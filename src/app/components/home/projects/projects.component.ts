@@ -19,7 +19,7 @@ import { EditTaskDialogComponent } from '../dialogs/edit-task-dialog/edit-task-d
 export class ProjectsComponent implements OnInit {
 	todos!: Todos;
 
-	lists: {
+	lists!: {
 		listTitle: string;
 		listDialogName: string;
 		listType: any[];
@@ -27,30 +27,53 @@ export class ProjectsComponent implements OnInit {
 	}[];
 
 	constructor(public dialog: MatDialog, private DataService: DataService) {
-		this.todos = this.DataService.getTodos();
+		// this.todos = this.DataService.getTodos();
+		// this.DataService.fetchTodos();
+	}
+
+	ngOnInit() {
+		// 	console.log('cange');
+		// this.todos = this.DataService.getTodos();
 		this.lists = [
 			{
 				listTitle: 'To do',
 				listDialogName: 'todo',
-				listType: this.todos.todo,
+				listType: [],
+				// listType: this.todos.todo,
 				connectedTo: ['done', 'inProgress'],
 			},
 			{
 				listTitle: 'In progress',
 				listDialogName: 'inProgress',
-				listType: this.todos.inProgress,
+				listType: [],
+				// listType: this.todos.inProgress,
 				connectedTo: ['done', 'todo'],
 			},
 			{
 				listTitle: 'Done',
 				listDialogName: 'done',
-				listType: this.todos.done,
+				listType: [],
+				// listType: this.todos.done,
 				connectedTo: ['todo', 'inProgress'],
 			},
 		];
-	}
 
-	ngOnInit(): void {}
+		this.DataService.todosObs.subscribe((data) => {
+			this.todos = data;
+
+			for (const key in data) {
+				const list = this.lists.findIndex((list) => {
+					return list.listDialogName === key;
+				});
+
+				if (list !== -1) {
+					this.lists[list].listType = data[<keyof Todos>key];
+				}
+			}
+		});
+
+		this.DataService;
+	}
 
 	drop(event: CdkDragDrop<any>) {
 		this.DataService.updateTodos();

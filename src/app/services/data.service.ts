@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { TodoList, Todos } from '../shared/interfaces';
 import { CookieService } from './cookie.service';
 
@@ -9,11 +10,16 @@ import { CookieService } from './cookie.service';
 export class DataService {
 	private userData!: { avatar: string; username: string };
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
+	todosObs: BehaviorSubject<Todos> = new BehaviorSubject<Todos>(this.todos);
+
+	// todosChange: Subject<Todos> = new Subject<Todos>();
 
 	constructor(
 		private CookieService: CookieService,
 		private firestore: AngularFirestore
-	) {}
+	) {
+		// this.todosObs.next(this.todos);
+	}
 
 	setUserData(userData: any) {
 		this.userData = userData;
@@ -71,6 +77,7 @@ export class DataService {
 				.subscribe((data: any) => {
 					console.log('fetchTodos!');
 					console.log(data);
+					// this.todosChange.next();
 
 					if (!data) {
 						console.log('no path!');
@@ -82,6 +89,8 @@ export class DataService {
 
 					if (data) {
 						this.todos = data;
+						this.todosObs.next(data);
+						console.log('todoobs', this.todosObs);
 					}
 					console.log('update todos');
 
