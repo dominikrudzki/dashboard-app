@@ -8,7 +8,7 @@ import { CookieService } from './cookie.service';
 	providedIn: 'root',
 })
 export class DataService {
-	private userData!: { avatar: string; username: string };
+	userData!: { avatar: string; username: string };
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
 	todosObs: BehaviorSubject<Todos> = new BehaviorSubject<Todos>(this.todos);
 
@@ -17,9 +17,7 @@ export class DataService {
 	constructor(
 		private CookieService: CookieService,
 		private firestore: AngularFirestore
-	) {
-		// this.todosObs.next(this.todos);
-	}
+	) {}
 
 	setUserData(userData: any) {
 		this.userData = userData;
@@ -27,13 +25,39 @@ export class DataService {
 	}
 
 	setUserAvatar(userAvatar: string) {
-		// console.log(userAvatar);
+		this.updateUserData({ avatar_url: `url('${userAvatar}')` });
+	}
 
-		this.userData.avatar = `url('${userAvatar}')`;
-		// console.log(this.userData.avatar);
+	setUserPassword(userPassword: string) {
+		this.updateUserData({ password: userPassword });
+	}
+
+	fetchUserData() {
+		this.firestore
+			.collection('users')
+			.doc(this.userData.username)
+			.valueChanges()
+			.subscribe((data: any) => {
+				this.userData.avatar = data.avatar_url;
+				this.userData.username =
+					this.CookieService.getCookieValue('user');
+				console.log(this.userData);
+
+				return this.userData;
+				// console.log(this.userData);
+			});
+	}
+
+	updateUserData(val: {}) {
+		this.firestore
+			.collection(`users`)
+			.doc(this.userData.username)
+			.update(val);
 	}
 
 	getUserData() {
+		// this.userData.avatar =
+		this.userData.username = this.CookieService.getCookieValue('user');
 		return this.userData;
 	}
 
@@ -90,9 +114,7 @@ export class DataService {
 					if (data) {
 						this.todos = data;
 						this.todosObs.next(data);
-						console.log('todoobs', this.todosObs);
 					}
-					console.log('update todos');
 
 					sub.unsubscribe();
 				});
