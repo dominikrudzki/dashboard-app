@@ -31,15 +31,23 @@
 			<button
 				mat-raised-button
 				color="basic"
-				(click)="openSettingsDialog('ps', 'password', 'ps')"
+				(click)="openSettingsDialog('ps', 'password', 'new password')"
 			>
 				Change
 			</button>
 		</mat-card-content>
 	</mat-card>
 	<mat-card>
-		<button mat-raised-button disabled color="warn">
+		<button
+			mat-raised-button
+			[disabled]="!deleteAccountEnable"
+			color="warn"
+			(click)="deleteAccount()"
+		>
 			Delete this account
 		</button>
+		<mat-slide-toggle [(ngModel)]="deleteAccountEnable" color="warn"
+			>Enable account delete</mat-slide-toggle
+		>
 	</mat-card>
 </div>

@@ -30,7 +30,7 @@ export class CookieService {
 			this.route.navigate(['/']);
 		} else {
 			this.cookieUserName = this.getCookieValue('user');
-			this.route.navigate(['/home']);
+			// this.route.navigate(['/home']);
 		}
 	}
 

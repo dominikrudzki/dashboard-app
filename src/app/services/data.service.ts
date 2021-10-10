@@ -147,4 +147,14 @@ export class DataService {
 	getTodos() {
 		return this.todos;
 	}
+
+	deleteAccount() {
+		this.firestore
+			.collection('users')
+			.doc(this.userData.username)
+			.delete()
+			.then(() => {
+				this.CookieService.deleteAllCookies();
+			});
+	}
 }

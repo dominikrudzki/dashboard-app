@@ -10,6 +10,7 @@ import { ChangeSettingsDialogComponent } from '../dialogs/change-settings-dialog
 })
 export class SettingsComponent implements OnInit {
 	user;
+	deleteAccountEnable = false;
 
 	constructor(private DataService: DataService, public dialog: MatDialog) {
 		this.user = DataService.getUserData();
@@ -31,5 +32,9 @@ export class SettingsComponent implements OnInit {
 		dialogRef.afterClosed().subscribe((result) => {
 			console.log('The dialog was closed');
 		});
+	}
+
+	deleteAccount() {
+		this.DataService.deleteAccount();
 	}
 }
