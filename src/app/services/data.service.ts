@@ -8,7 +8,7 @@ import { CookieService } from './cookie.service';
 	providedIn: 'root',
 })
 export class DataService {
-	userData!: { avatar: string; username: string };
+	userData!: { avatar: string; username: string; createDate: number };
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
 	todosObs: BehaviorSubject<Todos> = new BehaviorSubject<Todos>(this.todos);
 
@@ -41,6 +41,8 @@ export class DataService {
 				this.userData.avatar = data.avatar_url;
 				this.userData.username =
 					this.CookieService.getCookieValue('user');
+				this.userData.createDate = data.create_date;
+
 				console.log(this.userData);
 
 				return this.userData;
