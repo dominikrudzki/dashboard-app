@@ -101,12 +101,7 @@ export class DataService {
 				.doc('todos')
 				.valueChanges()
 				.subscribe((data: any) => {
-					console.log('fetchTodos!');
-					console.log(data);
-					// this.todosChange.next();
-
 					if (!data) {
-						console.log('no path!');
 						this.firestore
 							.collection(`users/${user}/todo`)
 							.doc('todos')
@@ -126,7 +121,6 @@ export class DataService {
 	}
 
 	updateTodos() {
-		console.log('todos updated!');
 		const user = this.CookieService.getCookieValue('user');
 
 		setTimeout(() => {

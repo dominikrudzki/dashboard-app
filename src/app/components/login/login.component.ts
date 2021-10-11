@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
 		private route: Router,
 		private snackbar: MatSnackBar,
 		private cookieService: CookieService
-	) {}
+	) {
+		this.cookieService.checkCookie() ? this.route.navigate(['/home']) : '';
+	}
 
 	ngOnInit(): void {
 		this.reactiveForm();
