@@ -32,7 +32,6 @@ export class CookieService {
 		} else {
 			this.cookieUserName = this.getCookieValue('user');
 			return true;
-			// this.route.navigate(['/home']);
 		}
 	}
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { TodoList, Todos } from '../shared/interfaces';
 import { CookieService } from './cookie.service';
 
@@ -11,8 +11,6 @@ export class DataService {
 	userData!: { avatar: string; username: string; createDate: number };
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
 	todosObs: BehaviorSubject<Todos> = new BehaviorSubject<Todos>(this.todos);
-
-	// todosChange: Subject<Todos> = new Subject<Todos>();
 
 	constructor(
 		private CookieService: CookieService,
@@ -58,23 +56,18 @@ export class DataService {
 	}
 
 	getUserData() {
-		// this.userData.avatar =
 		this.userData.username = this.CookieService.getCookieValue('user');
 		return this.userData;
 	}
 
 	addTodos(list: TodoList, item: any) {
 		this.todos[list].push(item);
-		console.log('addTodos', this.todos);
-
 		this.updateTodos();
 	}
 
 	editTodos(list: TodoList, item: any, index: number) {
-		console.log(list, item);
-
-		// this.todos[list].
-		console.log(this.todos[list][index]);
+		// console.log(list, item);
+		// console.log(this.todos[list][index]);
 
 		this.todos[list][index].title = item.title;
 		this.todos[list][index].description = item.description;
@@ -142,7 +135,13 @@ export class DataService {
 		return this.todos;
 	}
 
+	clearTodos() {
+		this.todos = { todo: [], inProgress: [], done: [] };
+	}
+
 	deleteAccount() {
+		this.clearTodos();
+
 		this.firestore
 			.collection('users')
 			.doc(this.userData.username)
