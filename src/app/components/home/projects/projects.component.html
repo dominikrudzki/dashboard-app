@@ -30,7 +30,9 @@
 					*ngFor="let item of list.listType; let i = index"
 					cdkDrag
 				>
-					<div class="buttons">
+					<!--  -->
+					<mat-toolbar>
+						<span class="example-spacer"></span>
 						<button
 							mat-icon-button
 							(click)="openEditDialog(list.listDialogName, i)"
@@ -43,7 +45,9 @@
 						>
 							<mat-icon>close</mat-icon>
 						</button>
-					</div>
+					</mat-toolbar>
+					<!--  -->
+
 					<h3>
 						<span>{{ item.title }}</span>
 					</h3>
