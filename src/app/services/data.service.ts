@@ -19,7 +19,7 @@ export class DataService {
 
 	setUserData(userData: any) {
 		this.userData = userData;
-		this.CookieService.setCookie('user', this.userData.username);
+		// this.CookieService.setCookie('user', this.userData.username);
 	}
 
 	setUserAvatar(userAvatar: string) {

@@ -60,25 +60,30 @@ export class LoginComponent implements OnInit {
 
 			if (snapshot.empty) {
 				this.openSnackBar('Wrong username or password');
+				this.loginForm.reset()
+				return
 			}
 
-				// .doc(`${value.username}`)
-				// .valueChanges()
-				// .subscribe((data: { password: string } | any) => {
-				// 	if (data.password === value.password) {
-				// 		console.log('You are logged in!');
-				// 		this.DataService.setUserData({
-				// 			avatar: '',
-				// 			username: value.username,
-				// 		});
+			snapshot.forEach((doc: any) => {
+				console.log(doc.data());
 
-				// 		this.route.navigate(['/home']);
-				// 	} else {
-				// 		this.openSnackBar('Wrong password');
-				// 	}
-				// });
+				if (value.password == doc.data().password) {
+					this.DataService.setUserData({
+						avatar: doc.data().avatar_url,
+						username: doc.data().username,
+						createDate: doc.data().create_date
+					});
+
+					this.cookieService.setCookie('user', doc.id)
+
+					this.route.navigate(['/home']);
+				} else {
+					this.openSnackBar('Wrong password');
+				}
+				// console.log(this.DataService.userData);
+			})
 		} catch {
-
+			this.openSnackBar('Server connection error');
 		}
 	}
 }
