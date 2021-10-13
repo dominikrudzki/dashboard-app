@@ -44,24 +44,24 @@ export class LoginComponent implements OnInit {
 			username: ['', Validators.required],
 			password: ['', Validators.required],
 		});
-
-
 	}
 
 	async submitForm(value: any) {
 		if (this.loginForm.invalid) {
 			this.openSnackBar('Fill in the fields');
-			return
+			return;
 		}
 
 		try {
 			const snapshot = await this.firestore
-				.collection('users').ref.where('username', '==' , value.username).get()
+				.collection('users')
+				.ref.where('username', '==', value.username)
+				.get();
 
 			if (snapshot.empty) {
 				this.openSnackBar('Wrong username or password');
-				this.loginForm.reset()
-				return
+				this.loginForm.reset();
+				return;
 			}
 
 			snapshot.forEach((doc: any) => {
@@ -71,17 +71,17 @@ export class LoginComponent implements OnInit {
 					this.DataService.setUserData({
 						avatar: doc.data().avatar_url,
 						username: doc.data().username,
-						createDate: doc.data().create_date
+						createDate: doc.data().create_date,
 					});
 
-					this.cookieService.setCookie('user', doc.id)
+					this.cookieService.setCookie('user', doc.id);
 
 					this.route.navigate(['/home']);
 				} else {
 					this.openSnackBar('Wrong password');
 				}
 				// console.log(this.DataService.userData);
-			})
+			});
 		} catch {
 			this.openSnackBar('Server connection error');
 		}

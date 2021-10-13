@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
@@ -36,21 +36,32 @@ export class RegisterComponent implements OnInit {
 
 	reactiveForm() {
 		this.registerForm = this.formBuilder.group({
-			username: [''],
-			password: [''],
+			username: ['', [Validators.required, Validators.minLength(5)]],
+			password: ['', [Validators.required, Validators.minLength(5)]],
 		});
 	}
 
 	async submitForm(value: any) {
-		console.log('Form submit');
+		if (this.registerForm.invalid) {
+			if (
+				!this.registerForm.value.username ||
+				!this.registerForm.value.password
+			) {
+				this.openSnackBar('Fill in the fields');
+				return;
+			}
+			this.openSnackBar(
+				'Username and password shoud have at least 5 characters'
+			);
+			return;
+		}
 
-		console.log(value);
-
-		await this.firestore.collection(`users`).doc(value.username).set({
-			password: value.password,
+		await this.firestore.collection(`users`).ref.add({
 			avatar_url:
 				"url('https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png')",
 			create_date: new Date().valueOf(),
+			password: value.password,
+			username: value.username,
 		});
 
 		this.route.navigate(['/']);
