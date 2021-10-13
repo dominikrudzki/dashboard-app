@@ -19,7 +19,7 @@ export class DataService {
 
 	setUserData(userData: any) {
 		this.userData = userData;
-		// this.CookieService.setCookie('user', this.userData.username);
+		this.CookieService.setCookie('user', this.userData.username);
 	}
 
 	setUserAvatar(userAvatar: string) {
@@ -30,22 +30,28 @@ export class DataService {
 		this.updateUserData({ password: userPassword });
 	}
 
-	fetchUserData() {
-		this.firestore
+	async fetchUserData() {
+		const snapshot = await this.firestore
 			.collection('users')
-			.doc(this.userData.username)
-			.valueChanges()
-			.subscribe((data: any) => {
-				this.userData.avatar = data.avatar_url;
-				this.userData.username =
-					this.CookieService.getCookieValue('user');
-				this.userData.createDate = data.create_date;
+			.doc(this.CookieService.getCookieValue('user'))
+			.get();
 
-				console.log(this.userData);
+		snapshot.forEach((doc: any) => {
+			this.userData.username = doc.data().username;
+			this.userData.avatar = doc.data().avatar_url;
+			this.userData.createDate = doc.data().create_date;
+		});
+		// .valueChanges()
+		// .subscribe((data: any) => {
+		// 	this.userData.avatar = data.avatar_url;
+		// 	this.userData.username = data.username;
+		// 	this.userData.createDate = data.create_date;
 
-				return this.userData;
-				// console.log(this.userData);
-			});
+		// 	console.log(this.userData);
+
+		// 	return this.userData;
+		// 	// console.log(this.userData);
+		// });
 	}
 
 	updateUserData(val: {}) {
