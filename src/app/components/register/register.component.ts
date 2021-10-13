@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
 			this.openSnackBar(
 				'Username and password shoud have at least 5 characters'
 			);
+			this.registerForm.reset();
 			return;
 		}
 

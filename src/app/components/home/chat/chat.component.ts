@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { CookieService } from 'src/app/services/cookie.service';
+import { DataService } from 'src/app/services/data.service';
 import { Message } from 'src/app/shared/interfaces';
 
 @Component({
@@ -14,7 +14,7 @@ export class ChatComponent implements OnInit {
 
 	constructor(
 		private firestore: AngularFirestore,
-		private CookieService: CookieService
+		private DataService: DataService
 	) {
 		this.messages = [{ author: '', date: new Date(), message: '' }];
 	}
@@ -51,7 +51,7 @@ export class ChatComponent implements OnInit {
 
 		await this.firestore.collection('chat').add({
 			id: new Date().valueOf(),
-			author: this.CookieService.getCookieValue('user'),
+			author: this.DataService.userData.username,
 			message: this.message,
 			date: new Date().valueOf(),
 		});

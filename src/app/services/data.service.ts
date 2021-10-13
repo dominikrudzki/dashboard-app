@@ -41,6 +41,7 @@ export class DataService {
 			this.userData.avatar = doc.data().avatar_url;
 			this.userData.createDate = doc.data().create_date;
 		});
+
 		// .valueChanges()
 		// .subscribe((data: any) => {
 		// 	this.userData.avatar = data.avatar_url;

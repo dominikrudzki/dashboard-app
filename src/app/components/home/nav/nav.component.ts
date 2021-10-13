@@ -10,11 +10,8 @@ import { DataService } from 'src/app/services/data.service';
 export class NavComponent implements OnInit {
 	userData: any;
 
-	constructor(
-		private CookieService: CookieService,
-		private DataService: DataService
-	) {
-		this.userData = this.DataService.getUserData();
+	constructor(private DataService: DataService) {
+		this.userData = this.DataService.userData;
 	}
 
 	ngOnInit(): void {}

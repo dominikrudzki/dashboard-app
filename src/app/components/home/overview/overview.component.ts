@@ -43,8 +43,7 @@ export class OverviewComponent {
 		private CookieService: CookieService,
 		private DataService: DataService
 	) {
-		// this.username = this.CookieService.cookieUserName;
-		this.userData = this.DataService.getUserData();
+		this.userData = this.DataService.userData;
 		console.log(this.userData.avatar);
 	}
 
