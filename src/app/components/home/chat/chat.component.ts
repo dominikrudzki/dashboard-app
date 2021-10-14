@@ -9,7 +9,7 @@ import { Message } from 'src/app/shared/interfaces';
 	styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-	messages: any;
+	messages: any; //all messages list
 	message: string = '';
 
 	constructor(
@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		const sub = this.firestore
+		this.firestore
 			.collection('chat')
 			.valueChanges()
 			.subscribe((messages: any) => {

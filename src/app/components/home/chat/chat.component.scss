@@ -32,7 +32,6 @@ mat-label {
 .example-viewport {
 	height: 200px;
 	width: 100%;
-	// border: 1px solid black;
 }
 
 .example-dt {
@@ -41,9 +40,11 @@ mat-label {
 }
 
 .example-dd {
-	border-bottom: 2px solid #333333;
 	padding: 0.2em 0;
 	margin-bottom: 1em;
+	background-color: #333333;
+	border-radius: 1em;
+	padding: 0.4em 0.6em;
 }
 
 .mat-card-content,
@@ -51,19 +52,28 @@ mat-label {
 	height: 100%;
 }
 
-.example-dt {
+.msg-header {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	font-size: 18px;
+	margin-bottom: 0.5em;
 
 	span {
+		display: block;
 		font-size: 14px;
 		color: rgb(112, 112, 112);
+
+		&:nth-of-type(1) {
+			font-size: 16px;
+			color: #fff;
+		}
 	}
 }
 
-img {
-	border-radius: 50%;
-	height: 100%;
+.profile-image {
+	background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+	background-size: cover;
+	height: 1.5em;
+	width: 1.5em;
 }

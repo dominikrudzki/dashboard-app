@@ -8,12 +8,15 @@
 			>
 				<dl class="example-dl">
 					<ng-container *cdkVirtualFor="let message of messages">
-						<dt class="example-dt">
-							{{ message.author }}
+						<div class="msg-header">
+							<div mat-card-avatar class="profile-image"></div>
+							<span>
+								{{ message.author }}
+							</span>
 							<span>
 								{{ message.date | date: "medium" }}
 							</span>
-						</dt>
+						</div>
 						<dd class="example-dd">
 							{{ message.message }}
 						</dd>
