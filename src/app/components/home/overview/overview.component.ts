@@ -40,11 +40,8 @@ export class OverviewComponent {
 	userData!: Promise<any>;
 
 	constructor(private DataService: DataService) {
-		this.DataService.userDataSet.subscribe((userData) => {
-			console.log(this.DataService.userData);
-			this.userData = new Promise<any>((resolve, reject) => {
-				resolve(this.DataService.userData);
-			});
+		this.userData = new Promise<any>((resolve, reject) => {
+			resolve(this.DataService.userData);
 		});
 	}
 

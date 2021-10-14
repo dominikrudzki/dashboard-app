@@ -22,7 +22,6 @@ export class ChangeSettingsDialogComponent implements OnInit {
 		switch (this.data.title) {
 			case 'avatar':
 				this.DataService.setUserAvatar(this.input);
-
 				break;
 			case 'password':
 				console.log('password change');

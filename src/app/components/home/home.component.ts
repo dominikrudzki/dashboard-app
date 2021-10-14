@@ -12,12 +12,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		private CookieService: CookieService,
 		private DataService: DataService
 	) {
-		// this.CookieService.checkCookie();
+		this.CookieService.checkCookie();
 		this.DataService.fetchUserData();
 	}
 
 	ngOnInit() {
-		// this.DataService.fetchTodos();
+		this.DataService.fetchTodos();
 		// if (!this.DataService.getUserData()) {
 		// 	console.log('new connection');
 		// }

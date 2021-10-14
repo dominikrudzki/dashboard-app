@@ -30,6 +30,7 @@ export class DataService {
 
 	setUserAvatar(userAvatar: string) {
 		this.updateUserData({ avatar_url: `url('${userAvatar}')` });
+		this.userData.avatar = `url('${userAvatar}')`;
 	}
 
 	setUserPassword(userPassword: string) {
@@ -54,14 +55,14 @@ export class DataService {
 			console.log('after');
 			console.log(this.userData);
 
-			this.userDataSet.next();
+			this.userDataSet.next(true);
 		});
 	}
 
 	updateUserData(val: {}) {
 		this.firestore
 			.collection(`users`)
-			.doc(this.userData.username)
+			.doc(this.CookieService.getCookieValue('user'))
 			.update(val);
 	}
 
