@@ -4,11 +4,14 @@
 			<div
 				mat-card-avatar
 				class="profile-image"
-				[style.background-image]="userData.avatar"
+				[style.background-image]="(userData | async)?.avatar"
 			></div>
-			<mat-card-title>Hi {{ userData.username }}</mat-card-title>
+			<mat-card-title
+				>Hi {{ (userData | async)?.username }}</mat-card-title
+			>
 			<mat-card-subtitle
-				>Account date created: {{ userData.createDate | date }}
+				>Account date created:
+				{{ (userData | async)?.createDate | date }}
 			</mat-card-subtitle>
 		</mat-card-header>
 		<mat-card-content>

@@ -37,14 +37,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class OverviewComponent {
 	displayedColumns: string[] = ['date', 'time', 'message'];
 	dataSource = new MatTableDataSource(ELEMENT_DATA);
-	userData: any;
+	userData!: Promise<any>;
 
-	constructor(
-		private CookieService: CookieService,
-		private DataService: DataService
-	) {
-		this.userData = this.DataService.userData;
-		console.log(this.userData.avatar);
+	constructor(private DataService: DataService) {
+		this.DataService.userDataSet.subscribe((userData) => {
+			console.log(this.DataService.userData);
+			this.userData = new Promise<any>((resolve, reject) => {
+				resolve(this.DataService.userData);
+			});
+		});
 	}
 
 	applyFilter(event: Event) {

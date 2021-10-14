@@ -8,10 +8,15 @@ import { DataService } from 'src/app/services/data.service';
 	styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-	userData: any;
+	userData!: Promise<any>;
 
 	constructor(private DataService: DataService) {
-		this.userData = this.DataService.userData;
+		this.DataService.userDataSet.subscribe((userData) => {
+			console.log(this.DataService.userData);
+			this.userData = new Promise<any>((resolve, reject) => {
+				resolve(this.DataService.userData);
+			});
+		});
 	}
 
 	ngOnInit(): void {}

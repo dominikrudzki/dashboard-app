@@ -1,9 +1,9 @@
 <mat-toolbar>
 	<span class="example-spacer"></span>
-	<span class="name">{{ userData.username }}</span>
+	<span class="name">{{ (userData | async)?.username }}</span>
 	<div
 		mat-card-avatar
 		class="profile-image"
-		[style.background-image]="userData.avatar"
+		[style.background-image]="(userData | async)?.avatar"
 	></div>
 </mat-toolbar>

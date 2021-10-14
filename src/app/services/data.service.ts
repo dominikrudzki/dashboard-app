@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { TodoList, Todos } from '../shared/interfaces';
 import { CookieService } from './cookie.service';
 
@@ -8,7 +8,13 @@ import { CookieService } from './cookie.service';
 	providedIn: 'root',
 })
 export class DataService {
-	userData!: { avatar: string; username: string; createDate: number };
+	userData: { avatar: string; username: string; createDate: number } = {
+		avatar: '',
+		username: '',
+		createDate: 1,
+	};
+	userDataSet: Subject<Boolean> = new Subject<Boolean>();
+
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
 	todosObs: BehaviorSubject<Todos> = new BehaviorSubject<Todos>(this.todos);
 
@@ -37,22 +43,19 @@ export class DataService {
 			.get();
 
 		snapshot.forEach((doc: any) => {
+			// console.log(doc);
+
+			// console.log(doc.data());
+			console.log('userdata');
+
 			this.userData.username = doc.data().username;
 			this.userData.avatar = doc.data().avatar_url;
 			this.userData.createDate = doc.data().create_date;
+			console.log('after');
+			console.log(this.userData);
+
+			this.userDataSet.next();
 		});
-
-		// .valueChanges()
-		// .subscribe((data: any) => {
-		// 	this.userData.avatar = data.avatar_url;
-		// 	this.userData.username = data.username;
-		// 	this.userData.createDate = data.create_date;
-
-		// 	console.log(this.userData);
-
-		// 	return this.userData;
-		// 	// console.log(this.userData);
-		// });
 	}
 
 	updateUserData(val: {}) {

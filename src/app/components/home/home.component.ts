@@ -12,21 +12,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		private CookieService: CookieService,
 		private DataService: DataService
 	) {
-		this.CookieService.checkCookie();
-
-		// tmp default values
-		this.DataService.setUserData({
-			avatar: 'url(https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png)', // fetch from database
-			username: 'username',
-			createDate: 1,
-		});
+		// this.CookieService.checkCookie();
+		this.DataService.fetchUserData();
 	}
 
-	async ngOnInit() {
-		await this.DataService.fetchUserData();
-
-		this.DataService.fetchTodos();
-
+	ngOnInit() {
+		// this.DataService.fetchTodos();
 		// if (!this.DataService.getUserData()) {
 		// 	console.log('new connection');
 		// }
