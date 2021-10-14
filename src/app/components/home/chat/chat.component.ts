@@ -16,7 +16,9 @@ export class ChatComponent implements OnInit {
 		private firestore: AngularFirestore,
 		private DataService: DataService
 	) {
-		this.messages = [{ author: '', date: new Date(), message: '' }];
+		this.messages = [
+			{ author: '', avatar: '', date: new Date(), message: '' },
+		];
 	}
 
 	ngOnInit() {
@@ -52,6 +54,7 @@ export class ChatComponent implements OnInit {
 		await this.firestore.collection('chat').add({
 			id: new Date().valueOf(),
 			author: this.DataService.userData.username,
+			avatar: this.DataService.userData.avatar,
 			message: this.message,
 			date: new Date().valueOf(),
 		});

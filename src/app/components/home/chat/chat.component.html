@@ -9,7 +9,11 @@
 				<dl class="example-dl">
 					<ng-container *cdkVirtualFor="let message of messages">
 						<div class="msg-header">
-							<div mat-card-avatar class="profile-image"></div>
+							<div
+								mat-card-avatar
+								[style.background-image]="message.avatar"
+								class="profile-image"
+							></div>
 							<span>
 								{{ message.author }}
 							</span>
