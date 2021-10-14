@@ -65,8 +65,6 @@ export class LoginComponent implements OnInit {
 			}
 
 			snapshot.forEach((doc: any) => {
-				console.log(doc.data());
-
 				if (value.password == doc.data().password) {
 					this.DataService.setUserData({
 						avatar: doc.data().avatar_url,
@@ -80,7 +78,6 @@ export class LoginComponent implements OnInit {
 				} else {
 					this.openSnackBar('Wrong password');
 				}
-				// console.log(this.DataService.userData);
 			});
 		} catch {
 			this.openSnackBar('Server connection error');

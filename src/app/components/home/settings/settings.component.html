@@ -6,7 +6,7 @@
 				<div
 					mat-card-avatar
 					class="profile-image"
-					[style.background-image]="user.avatar"
+					[style.background-image]="userData.avatar"
 				></div>
 			</div>
 			<button
@@ -14,7 +14,7 @@
 				color="basic"
 				(click)="
 					openSettingsDialog(
-						user.avatar,
+						userData.avatar,
 						'avatar',
 						'image url [ png, jpg ]'
 					)

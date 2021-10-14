@@ -9,15 +9,14 @@ import { ChangeSettingsDialogComponent } from '../dialogs/change-settings-dialog
 	styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-	user;
+	userData: any;
 	deleteAccountEnable = false;
 
-	constructor(private DataService: DataService, public dialog: MatDialog) {
-		this.user = DataService.getUserData();
-		console.log(this.user);
-	}
+	constructor(private DataService: DataService, public dialog: MatDialog) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.userData = this.DataService.userData;
+	}
 
 	openSettingsDialog(
 		list: string,

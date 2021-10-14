@@ -26,8 +26,6 @@ export class ChatComponent implements OnInit {
 			.collection('chat')
 			.valueChanges()
 			.subscribe((messages: any) => {
-				console.log(messages);
-
 				this.messages = messages.sort((a: Message, b: Message) => {
 					return a.id - b.id;
 				});
@@ -39,8 +37,6 @@ export class ChatComponent implements OnInit {
 	}
 
 	scrollToBottom(): void {
-		console.log('scroll');
-
 		try {
 			document
 				.querySelector('.example-dt:last-of-type')
@@ -49,8 +45,6 @@ export class ChatComponent implements OnInit {
 	}
 
 	async sendMessage() {
-		console.log(this.message);
-
 		await this.firestore.collection('chat').add({
 			id: new Date().valueOf(),
 			author: this.DataService.userData.username,
@@ -60,6 +54,5 @@ export class ChatComponent implements OnInit {
 		});
 
 		this.message = '';
-		console.log('submit');
 	}
 }

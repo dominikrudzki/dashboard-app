@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 	providedIn: 'root',
 })
 export class CookieService {
-	cookieUser!: any;
+	// cookieUser!: any;
 
 	constructor(private route: Router) {}
 
@@ -13,7 +13,7 @@ export class CookieService {
 		const date = new Date();
 		date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000);
 		document.cookie = `${cookieName}=${value}; expires=${date.toUTCString()}`;
-		this.cookieUser = value;
+		// this.cookieUser = value;
 	}
 
 	getCookieValue = (name: string) =>

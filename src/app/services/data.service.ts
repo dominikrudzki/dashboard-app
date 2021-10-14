@@ -28,9 +28,26 @@ export class DataService {
 		this.CookieService.setCookie('user', this.userData.username);
 	}
 
-	setUserAvatar(userAvatar: string) {
+	async setUserAvatar(userAvatar: string) {
 		this.updateUserData({ avatar_url: `url('${userAvatar}')` });
 		this.userData.avatar = `url('${userAvatar}')`;
+
+		const snapshot = await this.firestore
+			.collection('chat')
+			.ref.where('author', '==', this.userData.username)
+			.get();
+
+		const messageIDs: string[] = [];
+		snapshot.forEach((doc) => {
+			messageIDs.push(doc.id);
+		});
+
+		messageIDs.forEach((messageID) => {
+			this.firestore
+				.collection('chat')
+				.doc(messageID)
+				.update({ avatar: this.userData.avatar });
+		});
 	}
 
 	setUserPassword(userPassword: string) {
@@ -44,16 +61,9 @@ export class DataService {
 			.get();
 
 		snapshot.forEach((doc: any) => {
-			// console.log(doc);
-
-			// console.log(doc.data());
-			console.log('userdata');
-
 			this.userData.username = doc.data().username;
 			this.userData.avatar = doc.data().avatar_url;
 			this.userData.createDate = doc.data().create_date;
-			console.log('after');
-			console.log(this.userData);
 
 			this.userDataSet.next(true);
 		});
@@ -77,9 +87,6 @@ export class DataService {
 	}
 
 	editTodos(list: TodoList, item: any, index: number) {
-		// console.log(list, item);
-		// console.log(this.todos[list][index]);
-
 		this.todos[list][index].title = item.title;
 		this.todos[list][index].description = item.description;
 
@@ -87,7 +94,6 @@ export class DataService {
 	}
 
 	deleteTodos(list: TodoList, item: any) {
-		console.log(this.todos[list][item]);
 		this.todos[list].splice(list.indexOf(item), 1);
 		this.updateTodos();
 	}
@@ -131,10 +137,7 @@ export class DataService {
 			this.firestore
 				.collection(`users/${user}/todo`)
 				.doc('todos')
-				.ref.update(this.todos)
-				.then(() => {
-					console.log('updated!', this.todos);
-				});
+				.ref.update(this.todos);
 		}, 500);
 	}
 
