@@ -57,6 +57,16 @@ export class RegisterComponent implements OnInit {
 			return;
 		}
 
+		const snapshot = await this.firestore
+			.collection('users')
+			.ref.where('username', '==', value.username)
+			.get();
+
+		if (!snapshot.empty) {
+			this.openSnackBar('This username is already taken');
+			return;
+		}
+
 		await this.firestore.collection(`users`).ref.add({
 			avatar_url:
 				"url('https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png')",
