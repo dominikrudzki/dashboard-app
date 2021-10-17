@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit {
 	scrollToBottom(): void {
 		try {
 			document
-				.querySelector('.example-dt:last-of-type')
+				.querySelector('.msg-header:last-of-type')
 				?.scrollIntoView({ behavior: 'smooth' });
 		} catch (err) {}
 	}
