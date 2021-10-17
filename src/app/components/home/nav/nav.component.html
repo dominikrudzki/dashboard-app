@@ -1,4 +1,12 @@
 <mat-toolbar>
+	<button
+		class="menuShow"
+		mat-icon-button
+		aria-label="Example icon-button with menu icon"
+		(click)="showMenu()"
+	>
+		<mat-icon>menu</mat-icon>
+	</button>
 	<span class="example-spacer"></span>
 	<span class="name">{{ (userData | async)?.username }}</span>
 	<div

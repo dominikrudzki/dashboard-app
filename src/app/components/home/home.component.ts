@@ -8,6 +8,8 @@ import { DataService } from 'src/app/services/data.service';
 	styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+	visible: Boolean = true;
+
 	constructor(
 		private CookieService: CookieService,
 		private DataService: DataService
@@ -18,9 +20,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.DataService.fetchTodos();
-		// if (!this.DataService.getUserData()) {
-		// 	console.log('new connection');
-		// }
+	}
+
+	toogleMenu() {
+		this.visible = !this.visible;
 	}
 
 	ngOnDestroy(): void {

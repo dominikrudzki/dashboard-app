@@ -16,3 +16,9 @@ mat-selection-list {
 		flex-grow: 1;
 	}
 }
+
+@media (max-width: 600px) {
+	mat-selection-list {
+		height: calc(100% - 56px);
+	}
+}

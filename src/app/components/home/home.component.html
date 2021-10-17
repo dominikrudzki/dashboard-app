@@ -1,6 +1,6 @@
-<div class="home">
-	<app-sidenav></app-sidenav>
-	<app-nav></app-nav>
+<div class="home" [class.hide]="!visible">
+	<app-sidenav (menuClick)="toogleMenu()"></app-sidenav>
+	<app-nav (menuHandler)="toogleMenu()"></app-nav>
 	<div class="content">
 		<router-outlet></router-outlet>
 	</div>

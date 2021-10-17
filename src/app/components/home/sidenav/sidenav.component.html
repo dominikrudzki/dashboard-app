@@ -6,6 +6,7 @@
 	<div class="menu">
 		<mat-list-option
 			value="ON"
+			(click)="emit()"
 			*ngFor="let item of navItems"
 			routerLink="{{ item.route }}"
 			[style.margin-top]="item.styles"

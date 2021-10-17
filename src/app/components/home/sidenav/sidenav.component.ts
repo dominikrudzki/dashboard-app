@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CookieService } from 'src/app/services/cookie.service';
 
 @Component({
@@ -25,6 +25,14 @@ export class SidenavComponent implements OnInit {
 		{ icon: 'logout', text: 'Log out', route: 'logout' },
 	];
 
+	@Output() menuClick: EventEmitter<void> = new EventEmitter<void>();
+
 	constructor() {}
 	ngOnInit(): void {}
+
+	emit() {
+		if (window.screen.width <= 768) {
+			this.menuClick.emit();
+		}
+	}
 }

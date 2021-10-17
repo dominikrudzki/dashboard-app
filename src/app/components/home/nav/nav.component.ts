@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'src/app/services/cookie.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,6 +8,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class NavComponent implements OnInit {
 	userData!: Promise<any>;
+	@Output() menuHandler: EventEmitter<void> = new EventEmitter<void>();
 
 	constructor(private DataService: DataService) {
 		this.userData = new Promise<any>((resolve, reject) => {
@@ -17,4 +17,8 @@ export class NavComponent implements OnInit {
 	}
 
 	ngOnInit(): void {}
+
+	showMenu() {
+		this.menuHandler.emit();
+	}
 }
