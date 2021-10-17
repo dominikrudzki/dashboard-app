@@ -31,7 +31,7 @@ export class SidenavComponent implements OnInit {
 	ngOnInit(): void {}
 
 	emit() {
-		if (window.screen.width <= 768) {
+		if (window.innerWidth <= 768) {
 			this.menuClick.emit();
 		}
 	}
