@@ -25,6 +25,10 @@ export class RegisterComponent implements OnInit {
 		this.reactiveForm();
 	}
 
+	ngAfterViewInit(): void {
+		alert("Don't pass any personal data in username or password");
+	}
+
 	openSnackBar(message: string, action: string = ''): void {
 		this.snackbar.open(message, action, {
 			duration: 6000,
