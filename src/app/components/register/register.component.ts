@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
 	openSnackBar(message: string, action: string = ''): void {
 		this.snackbar.open(message, action, {
-			duration: 3000,
+			duration: 6000,
 			panelClass: ['warn'],
 			horizontalPosition: 'end',
 			verticalPosition: 'bottom',
@@ -36,7 +36,14 @@ export class RegisterComponent implements OnInit {
 
 	reactiveForm() {
 		this.registerForm = this.formBuilder.group({
-			username: ['', [Validators.required, Validators.minLength(5)]],
+			username: [
+				'',
+				[
+					Validators.required,
+					Validators.minLength(4),
+					Validators.maxLength(10),
+				],
+			],
 			password: ['', [Validators.required, Validators.minLength(5)]],
 		});
 	}
@@ -51,7 +58,7 @@ export class RegisterComponent implements OnInit {
 				return;
 			}
 			this.openSnackBar(
-				'Username and password shoud have at least 5 characters'
+				'Username shoud have between 4 - 10 characters and password shoud have at least 5 characters'
 			);
 			this.registerForm.reset();
 			return;
