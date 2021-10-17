@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/services/data.service';
 import { Message } from 'src/app/shared/interfaces';
 
@@ -9,17 +10,14 @@ import { Message } from 'src/app/shared/interfaces';
 	styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-	messages: any; //all messages list
+	messages: any = [{ author: '', avatar: '', date: new Date(), message: '' }]; //all messages list
 	message: string = '';
 
 	constructor(
 		private firestore: AngularFirestore,
-		private DataService: DataService
-	) {
-		this.messages = [
-			{ author: '', avatar: '', date: new Date(), message: '' },
-		];
-	}
+		private DataService: DataService,
+		private snackbar: MatSnackBar
+	) {}
 
 	ngOnInit() {
 		this.firestore
@@ -36,6 +34,15 @@ export class ChatComponent implements OnInit {
 			});
 	}
 
+	openSnackBar(message: string, action: string = ''): void {
+		this.snackbar.open(message, action, {
+			duration: 3000,
+			panelClass: ['warn'],
+			horizontalPosition: 'end',
+			verticalPosition: 'bottom',
+		});
+	}
+
 	scrollToBottom(): void {
 		try {
 			document
@@ -45,6 +52,12 @@ export class ChatComponent implements OnInit {
 	}
 
 	async sendMessage() {
+		if (this.message.trim().length === 0) {
+			this.openSnackBar('Your message is empty!');
+			this.message = '';
+			return;
+		}
+
 		await this.firestore.collection('chat').add({
 			id: new Date().valueOf(),
 			author: this.DataService.userData.username,
