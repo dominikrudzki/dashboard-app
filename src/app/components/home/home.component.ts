@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.DataService.fetchTodos();
+		this.DataService.fetchAllUsers();
 	}
 
 	toogleMenu() {

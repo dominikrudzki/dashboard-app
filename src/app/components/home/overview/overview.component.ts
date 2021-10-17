@@ -1,33 +1,26 @@
 import { Time } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { CookieService } from 'src/app/services/cookie.service';
 import { DataService } from 'src/app/services/data.service';
-import { UserData } from 'src/app/shared/interfaces';
 
 export interface PeriodicElement {
-	date: Date;
-	time: Time;
-	message: string;
+	avatar: string;
+	username: string;
+	date: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-	{
-		date: new Date(2021, 0o0, 0o1),
-		time: { hours: 0, minutes: 0 },
-		message: 'Happy new 2021!',
-	},
-	{
-		date: new Date(2020, 0o2, 0o24),
-		time: { hours: 7, minutes: 14 },
-		message: 'Welcome!',
-	},
-	{
-		date: new Date(2018, 0o5, 0o5),
-		time: { hours: 12, minutes: 32 },
-		message: 'Hello World',
-	},
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+// 	{
+// 		avatar: 'https://blog.angular-university.io/content/images/2020/12/main-page-logo-small-hat.png',
+// 		username: 'admin',
+// 		date: 0,
+// 	},
+// 	{
+// 		avatar: 'https://blog.angular-university.io/content/images/2020/12/main-page-logo-small-hat.png',
+// 		username: 'mama',
+// 		date: 0,
+// 	},
+// ];
 
 @Component({
 	selector: 'app-overview',
@@ -36,13 +29,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class OverviewComponent {
 	displayedColumns: string[] = ['date', 'time', 'message'];
-	dataSource = new MatTableDataSource(ELEMENT_DATA);
+	dataSource = new MatTableDataSource();
 	userData!: Promise<any>;
 
 	constructor(private DataService: DataService) {
 		this.userData = new Promise<any>((resolve, reject) => {
 			resolve(this.DataService.userData);
+
+			this.DataService.allUsers.subscribe((obs) => {
+				this.dataSource = new MatTableDataSource(
+					this.DataService.allUsers.value
+				);
+			});
 		});
+
+		// this.dataSource = new MatTableDataSource(this.DataService.allUsers);
 	}
 
 	applyFilter(event: Event) {

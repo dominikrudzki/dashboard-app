@@ -14,6 +14,14 @@ export class DataService {
 		createDate: 1,
 	};
 	userDataSet: Subject<Boolean> = new Subject<Boolean>();
+	allUsers: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+	// allUsers = [
+	// 	{
+	// 		avatar: 'https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png',
+	// 		username: 'username',
+	// 		date: 0,
+	// 	},
+	// ];
 
 	private todos: Todos = { todo: [], inProgress: [], done: [] };
 	todosObs: BehaviorSubject<Todos> = new BehaviorSubject<Todos>(this.todos);
@@ -26,6 +34,15 @@ export class DataService {
 	setUserData(userData: any) {
 		this.userData = userData;
 		this.CookieService.setCookie('user', this.userData.username);
+	}
+
+	fetchAllUsers() {
+		this.firestore
+			.collection('users')
+			.valueChanges()
+			.forEach((user: any) => {
+				this.allUsers.next(user);
+			});
 	}
 
 	async setUserAvatar(userAvatar: string) {
