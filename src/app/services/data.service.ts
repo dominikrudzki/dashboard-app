@@ -153,7 +153,7 @@ export class DataService {
 				.collection(`users/${user}/todo`)
 				.doc('todos')
 				.ref.update(this.todos);
-		}, 500);
+		}, 10);
 	}
 
 	getSpecificTodo(listName: TodoList, index: number) {
