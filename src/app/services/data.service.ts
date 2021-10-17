@@ -123,7 +123,7 @@ export class DataService {
 		const user = this.CookieService.getCookieValue('user');
 
 		try {
-			const sub = this.firestore
+			this.firestore
 				.collection(`users/${user}/todo`)
 				.doc('todos')
 				.valueChanges()
@@ -139,8 +139,6 @@ export class DataService {
 						this.todos = data;
 						this.todosObs.next(data);
 					}
-
-					sub.unsubscribe();
 				});
 		} catch {
 			// this.openSnackBar('Fill in the fields');
