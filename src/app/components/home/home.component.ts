@@ -27,8 +27,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this.visible = !this.visible;
 	}
 
+	closeMenu() {
+		if (window.innerWidth <= 768) {
+			this.visible = true;
+		}
+	}
+
 	ngOnDestroy(): void {
-		console.log('destroy');
 		this.DataService.resetTodos();
 	}
 }

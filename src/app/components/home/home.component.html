@@ -1,7 +1,7 @@
 <div class="home" [class.hide]="!visible">
 	<app-sidenav (menuClick)="toogleMenu()"></app-sidenav>
 	<app-nav (menuHandler)="toogleMenu()"></app-nav>
-	<div class="content">
+	<div class="content" (click)="closeMenu()">
 		<router-outlet></router-outlet>
 	</div>
 </div>
